@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+//import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.JSONParser;
 
 public class RestRead {
@@ -32,7 +33,7 @@ public class RestRead {
 				//TODO: Fill in placeholders when Restaurant Type is complete.
 				Restaurant r = new Restaurant("placeholder name", id, new Location("placeholder address",
 																					"placeholder city",
-																					"placeholder province"));
+																					"placeholder province"), null);
 				
 				rbRest.put(id, r);
 			}
@@ -71,8 +72,9 @@ public class RestRead {
 						(String)currObj.get("address"),
 						(String)currObj.get("city"),
 						(String)currObj.get("state"));
+				JSONObject attributes = new JSONObject(currObj.get("attributes"));
 				
-				restaurantData.put(id, new Restaurant(name, id, loc));
+				restaurantData.put(id, new Restaurant(name, id, loc, attributes));
 				
 			}
 			
@@ -88,7 +90,27 @@ public class RestRead {
 	
 	public static void main(String args[]) {
 		initRestaurants();
-//		RedBlackBST<String, Restaurant> rbbst = readRestaurants();
+		
+		Stopwatch sw = new Stopwatch();
+		sw.tick();
+		RedBlackBST<String, Restaurant> rbbst = readRestaurants();
+		assert rbbst.contains("1SWheh84yJXfytovILXOAQ");
+		assert rbbst.contains("i6hWP3si97eKQl_JyK8L3w");
+		sw.tock();
+		
+		System.out.println("Building the BST took " + sw.elapsedMillis() +  "ms");
+		
+		// Test case: The Arizona Biltmore Golf Club is not good for kids
+		sw.tick();
+		System.out.println(rbbst.get("1SWheh84yJXfytovILXOAQ").toString());
+		sw.tock();
+		assert rbbst.get("1SWheh84yJXfytovILXOAQ").hasAttribute("GoodForKids");
+		assert rbbst.get("1SWheh84yJXfytovILXOAQ").getAttribute("GoodForKids") == "true";
+		
+		System.out.println("Finding the golf club took " + sw.elapsedMillis() + "ms");
+		
+		System.out.println(rbbst.get("i6hWP3si97eKQl_JyK8L3w").toString());
+		
 	}
 }
 
