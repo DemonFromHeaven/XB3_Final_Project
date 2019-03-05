@@ -14,26 +14,24 @@ public class Location {
 	// Holds the read value of the address
 	private String addr;
 	private String city;
-	private String province;
-	private String country;
+	private String state;
 	
 	/**
 	 * Make a new address object
 	 * @param addr
 	 */
-	public Location(String addr, String city, String province, String country) {
+	public Location(String addr, String city, String state) {
 		this.addr = addr;
 		this.city = city;
-		this.province = province;
-		this.country = country;
+		this.state = state;
 	}
 	
 	/**
 	 * Get the address of this Location
 	 * @return The address of the location as a human legible string
 	 */
-	public String getAddress() {
-		return addr + ", " + city + ", " + province + ", " + country;
+	public String toString() {
+		return addr + ", " + city + ", " + state;
 	}
 	
 	/**
@@ -43,7 +41,7 @@ public class Location {
 	 */
 	public String getDirectionsURL() {
 		//throw new UnsupportedOperationException("Not yet capable to interface with Google Maps");
-		String cleaned = getAddress().replaceAll(",", "%2C");
+		String cleaned = toString().replaceAll(",", "%2C");
 		cleaned = cleaned.replaceAll(" ", "+");
 		return "https://www.google.com/maps/dir/?api=1&destination=" + cleaned;
 	}
@@ -63,7 +61,7 @@ public class Location {
 	 * @param args The command line arguments
 	 */
 	public static void main(String[] args) {
-		Location there = new Location("The Woolwich in Arms Pub", "Guelph", "Ontario", "Canada");
+		Location there = new Location("The Woolwich in Arms Pub", "Guelph", "Ontario");
 		System.out.println(there.getDirectionsURL());
 		
 	}

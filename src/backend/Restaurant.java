@@ -30,4 +30,8 @@ public class Restaurant implements Comparable<Restaurant> {
 		return this.id.compareTo(that.id);
 	}
 	
+	public String toString() {
+		return name + ", at " + loc;
+	}
+	
 }
