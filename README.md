@@ -5,6 +5,5 @@ This repository contains the Eclipse project for our group's
 final project for McMaster's Software 2XB3 Experiential
 class.
 
-### REQUIRED LIBRARIES
-
-[JSON in Java (org.json)](https://github.com/stleary/JSON-java)
+### Maven
+This project uses Maven to build and handle dependencies.
