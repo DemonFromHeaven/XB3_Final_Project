@@ -33,7 +33,7 @@ public class RestRead {
 				//TODO: Fill in placeholders when Restaurant Type is complete.
 				Restaurant r = new Restaurant("placeholder name", id, new Location("placeholder address",
 																					"placeholder city",
-																					"placeholder province"), null);
+																					"placeholder province",0,0), null);
 				
 				rbRest.put(id, r);
 			}
@@ -71,7 +71,9 @@ public class RestRead {
 				Location loc = new Location(
 						(String)currObj.get("address"),
 						(String)currObj.get("city"),
-						(String)currObj.get("state"));
+						(String)currObj.get("state"),
+						currObj.getInt("latitude"),
+						currObj.getInt("longitude"));
 				JSONObject attributes = new JSONObject(currObj.get("attributes"));
 				
 				restaurantData.put(id, new Restaurant(name, id, loc, attributes));
