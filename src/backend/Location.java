@@ -11,6 +11,9 @@ package backend;
  */
 public class Location {
 	
+	// Mean Volumetric Radius, taken from https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
+	private static final double EARTH_RADIUS = 6371.000;
+	
 	// Holds the read value of the address
 	private String addr;
 	private String city;
@@ -32,17 +35,46 @@ public class Location {
 	}
 	
 	/**
-	 * Get the address of this Location
-	 * @return The address of the location as a human legible string
+	 * Get the human readable address of this Location.
+	 * This function omits parts of the address that weren't provided.
+	 * @return The address of the location as a human readable String
 	 */
 	public String toString() {
-		return addr + ", " + city + ", " + state;
+		
+		// The string that holds the address representation
+		String rep = "";
+		
+		if (addr != "") {
+			
+			rep += addr;
+			if (city != "") {
+				rep += ", " + city;
+			}
+			
+			if (state != "") {
+				rep += ", " + state;
+			}
+			
+		} else {
+			
+			if (city !="") {
+				rep += city;
+				if (state != "") {
+					rep += ", " + state;
+				}
+			} else if (state != "") {
+				rep += state;
+			}
+			
+		}
+		return rep;
 	}
 	
 	/**
 	 * Generates the Google Maps URL that will give directions
 	 * to the Location.
-	 * @return
+	 * @return A String that represents the URL that when opened
+	 * gives directions to the location.
 	 */
 	public String getDirectionsURL() {
 		String cleaned = toString().replaceAll(",", "%2C");
@@ -52,22 +84,33 @@ public class Location {
 	
 	/**
 	 * Returns the distance to another location in kilometers.
-	 * Uses the latitude and longitude to do this
+	 * Uses the latitude and longitude in order to do this.
+	 * The formula for calculating the distance was found on these websites:
+	 * https://www.movable-type.co.uk/scripts/latlong.html
+	 * https://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
+	 * </detail>
 	 * @param that The other location
 	 * @return The distance between the locations in kilometers
 	 */
-	public int distanceTo(Location that) {
-		//https://www.movable-type.co.uk/scripts/latlong.html
-		throw new UnsupportedOperationException("Not yet capable to interface with Google Maps");
-	}
-	
-	/**
-	 * For unit testing the Location class
-	 * @param args The command line arguments
-	 */
-	public static void main(String[] args) {
-		Location there = new Location("The Woolwich in Arms Pub", "Guelph", "Ontario", 0, 0);
-		System.out.println(there.getDirectionsURL());
+	public double distanceTo(Location that) {
+		
+		double deltaLatHalf = (Math.toRadians(that.lattitude) - Math.toRadians(this.lattitude))/2;
+		double deltaLongHalf = (Math.toRadians(that.longitude) - Math.toRadians(this.longitude))/2;
+		
+		double latSinePart = Math.sin(deltaLatHalf);
+		latSinePart *= latSinePart;
+		
+		double longSinePart = Math.sin(deltaLongHalf);
+		longSinePart *= longSinePart;
+		
+		double a = latSinePart
+				+ Math.cos(Math.toRadians(this.lattitude))
+				* Math.cos(Math.toRadians(that.lattitude))
+				* longSinePart;
+		
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		
+		return c * EARTH_RADIUS;
 		
 	}
 	
