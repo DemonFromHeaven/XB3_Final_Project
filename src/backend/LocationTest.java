@@ -13,13 +13,27 @@ public class LocationTest {
 	@Before
 	public void setUp() {
 		// The Wooly Pub in Guelph
-		l1 = new Location("176 Woolwich St", "Guelph", "ON", 43.548245, -80.252036);
+		l1 = new Location("176 Woolwich St",
+				"Guelph",
+				"ON",
+				43.548245,
+				-80.252036);
 		// Basilique in Westdale
-		l2 = new Location("1065 King St W", "Hamilton", "ON", 43.261169, -79.906957);
-		// Webers burgers in Orillia
-		l3 = new Location("8825 ON-11", "Orillia", "ON", 44.694138, -79.398080);
+		l2 = new Location("1065 King St W",
+				"Hamilton",
+				"ON",
+				43.261169,
+				-79.906957);
+		// Webers burgers in Orillia ("8825 ON-11")
+		l3 = new Location("",
+				"Orillia",
+				"ON",
+				44.694138,
+				-79.398080);
 		// Edge case
 		l4 = new Location("", "", "", 0, 0);
+		// Another edge case (Some place in Texas)
+		l5 = new Location("", "", "TX", 31.203330, -98.666411);
 	}
 
 	@After
@@ -54,7 +68,7 @@ public class LocationTest {
 	/**
 	 * Distance from the Wooly to Webers
 	 * Epsilon is set to 100 meters, the precision
-	 * given by the online claculator I am using
+	 * given by the online calculator I am using
 	 */
 	@Test
 	public void normalCase2Distance() {
@@ -71,19 +85,55 @@ public class LocationTest {
 		assertEquals(Math.abs(l2.distanceTo(l3)), 164.5, 0.1);
 	}
 	
+	/**
+	 * Make sure that a completely address is represented by ""
+	 */
 	@Test
 	public void edgeCase1ToString() {
 		assertEquals(l4.toString(), "");
 	}
 	
+	/**
+	 * Ensure that if only a state is provided, then it outputs as expected
+	 */
+	@Test
+	public void edgeCase2ToString() {
+		assertEquals(l5.toString(), "TX");
+	}
+	
+	/**
+	 * Ensure that if only a city and state are provided, it outputs as expected
+	 */
+	@Test
+	public void edgeCase3ToString() {
+		assertEquals(l3.toString(), "Orillia, ON");
+	}
+	
+	/**
+	 * Test a regular, expected case for converting a Location to String
+	 */
 	@Test
 	public void normalCase1ToString() {
 		assertEquals(l1.toString(), "176 Woolwich St, Guelph, ON");
 	}
 	
+	/**
+	 * Test another regular, expected case for converting
+	 * a Location to String
+	 */
 	@Test
 	public void normalCase2ToString() {
 		assertEquals(l2.toString(), "1065 King St W, Hamilton, ON");
+	}
+	
+	@Test
+	public void mapsURL() {
+		System.out.println("Manually enter into browser to check");
+		System.out.println("Wooly pub, Guelph:\t\t" + l1.getDirectionsURL());
+		System.out.println("Basilique, Westdale:\t\t" + l2.getDirectionsURL());
+		// This part is different, because since the entire address isn't
+		// provided, the system has to default to lattitude and longitude
+		System.out.println("Weber's burgers, Orillia:\t" + l3.getDirectionsURL());
 	}
 
 }

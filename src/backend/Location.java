@@ -77,6 +77,15 @@ public class Location {
 	 * gives directions to the location.
 	 */
 	public String getDirectionsURL() {
+		
+		// If one of the words fields is missing, generate the URL based off
+		// lattitude/longitude
+		if (addr == "" || city == "" || state == "" ) {
+			String dest = lattitude + "%2C" + longitude;
+			return "https://www.google.com/maps/dir/?api=1&destination=" + dest;
+		}
+		
+		// Otherwise, generate based on Location string
 		String cleaned = toString().replaceAll(",", "%2C");
 		cleaned = cleaned.replaceAll(" ", "+");
 		return "https://www.google.com/maps/dir/?api=1&destination=" + cleaned;
