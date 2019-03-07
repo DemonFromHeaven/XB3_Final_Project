@@ -1,8 +1,9 @@
 package backend.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,6 +41,14 @@ public class RestReadTest {
 		System.out.println("Building the RBBST took "
 				+ sw.elapsedMillis()
 				+ "ms");
+	}
+	
+	/**
+	 * Let the RBBST fall into the GC so that resources are freed
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() {
+		restRBBST = null;
 	}
 	
 	@Before
