@@ -12,7 +12,8 @@ public class Restaurant implements Comparable<Restaurant> {
 											// to an attribute file
 	
 	// TODO: accept the attribute mapping and store it, finish API
-	public Restaurant(String name, String id, Location loc, double stars, JSONObject attributes) {
+	public Restaurant(String name, String id, Location loc, double stars,
+			JSONObject attributes) {
 		this.name = name;
 		this.id = id;
 		this.loc = loc;

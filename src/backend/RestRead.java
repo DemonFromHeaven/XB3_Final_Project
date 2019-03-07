@@ -95,29 +95,6 @@ public class RestRead {
 		
 	}
 	
-	public static void main(String args[]) {
-		initRestaurants();
-		
-		Stopwatch sw = new Stopwatch();
-		sw.tick();
-		RedBlackBST<String, Restaurant> rbbst = readRestaurants();
-		assert rbbst.contains("1SWheh84yJXfytovILXOAQ");
-		assert rbbst.contains("i6hWP3si97eKQl_JyK8L3w");
-		sw.tock();
-		
-		System.out.println("Building the BST took " + sw.elapsedMillis() +  "ms");
-		
-		// Test case: The Arizona Biltmore Golf Club is not good for kids
-		sw.tick();
-		System.out.println(rbbst.get("1SWheh84yJXfytovILXOAQ").toString());
-		sw.tock();
-		assert rbbst.get("1SWheh84yJXfytovILXOAQ").hasAttribute("GoodForKids");
-		assert rbbst.get("1SWheh84yJXfytovILXOAQ").getAttribute("GoodForKids") == "true";
-		
-		System.out.println("Finding the golf club took " + sw.elapsedMillis() + "ms");
-		
-		System.out.println(rbbst.get("i6hWP3si97eKQl_JyK8L3w").toString());
-		
-	}
+	
 }
 
