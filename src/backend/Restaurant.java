@@ -25,6 +25,10 @@ public class Restaurant implements Comparable<Restaurant> {
 		return name;
 	}
 	
+	public String getID() {
+		// TODO:
+	}
+	
 	public String getAttribute(String attribute) {
 		return attributes.getString(attribute);
 	}
@@ -43,6 +47,18 @@ public class Restaurant implements Comparable<Restaurant> {
 
 	public double getStars() {
 		return stars;
+	}
+	
+	public double getPrice() {
+		// TODO:
+	}
+	
+	public int reviewCount() {
+		// TODO:
+	}
+	
+	public Location getLocation() {
+		// TODO:
 	}
 	
 }
