@@ -1,7 +1,5 @@
 package backend.tests;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,10 +12,8 @@ import backend.Restaurant;
 import backend.Stopwatch;
 
 /**
- * Potential test cases to try:
- *  * Numerical fields in attributes (int and double)
- * @author david
- *
+ * Test to make sure that the data from the JSON file is correct
+ * @author David Thompson
  */
 public class RestReadTest {
 
@@ -61,11 +57,11 @@ public class RestReadTest {
 
 	/**
 	 * Check if the BST contains the first business in the business.json file,
-	 * Arizona Biltmore Golf Club
+	 * Arizona Biltmore Golf Club. It shouldn't because it is not a restaurant
 	 */
 	@Test
 	public void idTestNormal1() {
-		assert restRBBST.contains(ARIZONA_GOLF);
+		assert !restRBBST.contains(ARIZONA_GOLF);
 	}
 	
 	/**
@@ -74,40 +70,6 @@ public class RestReadTest {
 	@Test
 	public void idTestNormal2() {
 		assert restRBBST.contains(HILTON_RICHMOND_TO);
-	}
-	
-	/**
-	 * Verify that the Arizona Biltmore Golf Club Object has the attribute field
-	 * 'GoodForKids'
-	 */
-	@Test
-	public void hasAttributeNormal1() {
-		assert restRBBST.get(ARIZONA_GOLF).hasAttribute("GoodForKids");
-	}
-	
-	/**
-	 * Verify that the correct value was read in for the attribute
-	 */
-	@Test
-	public void correctAttributeNormal1() {
-		assertEquals(restRBBST.get(ARIZONA_GOLF).getAttribute("GoodForKids"), "False");		
-	}
-	
-	/**
-	 * That's the name of the game. We are playing the name game. Name something
-	 * something fame.
-	 */
-	@Test
-	public void name() {
-		System.out.println(restRBBST.get(ARIZONA_GOLF).toString());
-		System.out.println(restRBBST.get(HILTON_RICHMOND_TO).toString());
-	}
-
-	/**
-	 * Benchmarking the time it takes to search the RBBST
-	 */
-	public void searchSpeedTest() {
-		// TODO: Perform a test and output the search time
 	}
 	
 }

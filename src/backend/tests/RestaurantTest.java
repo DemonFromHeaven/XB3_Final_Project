@@ -22,7 +22,7 @@ public class RestaurantTest {
 	@Before
 	public void setUp() {
 		r1 = new Restaurant("The Wooly", "y7y7y7yu8u8u8u",
-				new Location(null, null, null, 0, 0), 4.0, null);
+				new Location(null, null, null, 0, 0), 4.0, 2, 69);
 	}
 	
 	@After
@@ -36,6 +36,11 @@ public class RestaurantTest {
 	@Test
 	public void testGetName() {
 		assertEquals(r1.getName(), "The Wooly");
+	}
+	
+	@Test
+	public void testGetLocation() {
+		assertEquals(r1.getLocation(), new Location(null, null, null, 0, 0));
 	}
 
 }

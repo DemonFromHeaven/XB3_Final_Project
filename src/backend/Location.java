@@ -35,42 +35,6 @@ public class Location {
 	}
 	
 	/**
-	 * Get the human readable address of this Location.
-	 * This function omits parts of the address that weren't provided.
-	 * @return The address of the location as a human readable String
-	 */
-	public String toString() {
-		
-		// The string that holds the address representation
-		String rep = "";
-		
-		if (addr != "") {
-			
-			rep += addr;
-			if (city != "") {
-				rep += ", " + city;
-			}
-			
-			if (state != "") {
-				rep += ", " + state;
-			}
-			
-		} else {
-			
-			if (city !="") {
-				rep += city;
-				if (state != "") {
-					rep += ", " + state;
-				}
-			} else if (state != "") {
-				rep += state;
-			}
-			
-		}
-		return rep;
-	}
-	
-	/**
 	 * Generates the Google Maps URL that will give directions
 	 * to the Location.
 	 * @return A String that represents the URL that when opened
@@ -121,6 +85,60 @@ public class Location {
 		
 		return c * EARTH_RADIUS;
 		
+	}
+	
+	/**
+	 * Checks if this location is the same as another.
+	 * This value is based solely off lattitude and longitude.
+	 * @param l The other location
+	 * @return True if the locations are the same, false otherwise.
+	 */
+	@Override
+	public boolean equals(Object that) {
+		try {
+			Location l = (Location)that;
+			boolean latSame = (this.lattitude - l.lattitude) < 0.0001;
+			boolean longSame = (this.longitude - l.longitude) < 0.0001;
+			return latSame && longSame;
+		} catch(ClassCastException cce) {
+			return false;
+		}
+	}
+	
+	/**
+	 * Get the human readable address of this Location.
+	 * This function omits parts of the address that weren't provided.
+	 * @return The address of the location as a human readable String
+	 */
+	public String toString() {
+		
+		// The string that holds the address representation
+		String rep = "";
+		
+		if (addr != "") {
+			
+			rep += addr;
+			if (city != "") {
+				rep += ", " + city;
+			}
+			
+			if (state != "") {
+				rep += ", " + state;
+			}
+			
+		} else {
+			
+			if (city !="") {
+				rep += city;
+				if (state != "") {
+					rep += ", " + state;
+				}
+			} else if (state != "") {
+				rep += state;
+			}
+			
+		}
+		return rep;
 	}
 	
 }

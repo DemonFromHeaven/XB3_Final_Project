@@ -46,6 +46,27 @@ public class LocationTest {
 		l4 = null;
 	}
 
+	@Test
+	public void testEquals() {
+		assertEquals(l1, new Location("176 Woolwich St",
+				"Guelph",
+				"ON",
+				43.548245,
+				-80.252036));
+		assertEquals(l2, new Location("1065 King St W",
+				"Hamilton",
+				"ON",
+				43.261169,
+				-79.906957));
+		assertEquals(l3, new Location("",
+				"Orillia",
+				"ON",
+				44.694138,
+				-79.398080));
+		assertEquals(l4, new Location("", "", "", 0, 0));
+		assertEquals(l5, new Location("", "", "TX", 31.203330, -98.666411));
+	}
+	
 	/**
 	 * Make sure that the distance from a location to that same location
 	 * is around 0.
