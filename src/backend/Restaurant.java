@@ -1,40 +1,52 @@
 package backend;
 
-import org.json.JSONObject;
-
 public class Restaurant implements Comparable<Restaurant> {
 
 	private String name;  // The name of the Restaurant
 	private String id;  // The unique identifier for the Restaurant from the file
 	private Location loc;  // The address of the Restaurant
 	private double stars;
-	private JSONObject attributes; // A map object that maps an attribute name
-											// to an attribute file
+	private int price;
+	private int reviewCount;
 	
-	// TODO: accept the attribute mapping and store it, finish API
-	public Restaurant(String name, String id, Location loc, double stars,
-			JSONObject attributes) {
+	public Restaurant(String name,
+			String id,
+			Location loc,
+			double stars,
+			int price,
+			int reviewCount) {
+		
 		this.name = name;
 		this.id = id;
 		this.loc = loc;
 		this.stars = stars;
-		this.attributes = attributes;
+		this.price = price;
+		this.reviewCount = reviewCount;
+		
+	}
+	
+	public String getID() {
+		return id;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public String getID() {
-		// TODO:
+	public double getStars() {
+		return stars;
 	}
 	
-	public String getAttribute(String attribute) {
-		return attributes.getString(attribute);
+	public double getPrice() {
+		return price;
 	}
 	
-	public boolean hasAttribute(String attribute) {
-		return attributes.has(attribute);
+	public int getReviewCount() {
+		return this.reviewCount;
+	}
+	
+	public Location getLocation() {
+		return this.loc;
 	}
 	
 	public int compareTo(Restaurant that) {
@@ -45,20 +57,4 @@ public class Restaurant implements Comparable<Restaurant> {
 		return name + " at " + loc;
 	}
 
-	public double getStars() {
-		return stars;
-	}
-	
-	public double getPrice() {
-		// TODO:
-	}
-	
-	public int reviewCount() {
-		// TODO:
-	}
-	
-	public Location getLocation() {
-		// TODO:
-	}
-	
 }
