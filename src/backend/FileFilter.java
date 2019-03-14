@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Filter {
+public class FileFilter {
 
 	public static void filterRest() {
 		File businessIn = new File("data/business.json");
