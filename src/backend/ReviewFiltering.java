@@ -9,16 +9,16 @@ import java.io.IOException;
 import org.json.JSONObject;
 
 /**
- * Removing data that is not needed
+ * Removes data that is not needed
  * @author Matthew Williams
  */
 public class ReviewFiltering {
-	private static final String REVIEW_FILEPATH = "data/reviewFiltered.json";
-	private static final String REVIEW_FILEPATH_UNFILTERED = "data/review.json";
+	private static final String REVIEW_FILEPATH_FILTERED = "data/reviewFiltered.json";
+	private static final String REVIEW_FILEPATH = "data/review.json";
 	
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(REVIEW_FILEPATH_UNFILTERED));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(REVIEW_FILEPATH));
+		BufferedReader br = new BufferedReader(new FileReader(REVIEW_FILEPATH));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(REVIEW_FILEPATH_FILTERED));
 		
 		String line, newLine;
 		
