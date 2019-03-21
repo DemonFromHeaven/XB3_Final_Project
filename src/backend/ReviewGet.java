@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Uses binary sort to retrieve reviews from a given user or restaurant
  * @author Matthew Williams L03 willim36
  */
-public class GetReviews {
+public class ReviewGet {
 	private static ReviewSort r = new ReviewSort();
 	/**
 	 * Retrieve reviews from this user

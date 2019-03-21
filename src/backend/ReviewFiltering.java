@@ -9,7 +9,7 @@ import java.io.IOException;
 import org.json.JSONObject;
 
 /**
- * Removes data that is not needed
+ * Includes only restaurants and removes unneccessary data
  * @author Matthew Williams
  */
 public class ReviewFiltering {
