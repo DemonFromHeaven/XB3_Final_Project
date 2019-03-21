@@ -12,8 +12,8 @@ import org.json.simple.parser.JSONParser;
 public class FileFilter {
 
 	public static String filterRest() {
-		String outFile = "data/businessFiltered.json";
-		File businessIn = new File("data/business.json");
+		String outFile = Filepaths.BUSINESS_FILEPATH_FILTERED;
+		File businessIn = new File(Filepaths.BUSINESS_FILEPATH);
 		File businessOut = new File(outFile);
 		
 		/**
@@ -39,13 +39,13 @@ public class FileFilter {
 		JSONParser parser = new JSONParser();
 		
 		try {
-			JSONArray jarrayCheckin = (JSONArray) parser.parse(new FileReader("data/checkin.json"));
-			JSONArray jarrayTip = (JSONArray) parser.parse(new FileReader("data/tip.json"));
-			JSONArray jarrayReview = (JSONArray) parser.parse(new FileReader("data/review.json"));
+			JSONArray jarrayCheckin = (JSONArray) parser.parse(new FileReader(Filepaths.CHECKIN_FILEPATH));
+			JSONArray jarrayTip = (JSONArray) parser.parse(new FileReader(Filepaths.TIP_FILEPATH));
+			JSONArray jarrayReview = (JSONArray) parser.parse(new FileReader(Filepaths.REVIEW_FILEPATH));
 			
-			FileWriter fwcheckin = new FileWriter(new File("data/checkinFiltered.json"));
-			FileWriter fwtip = new FileWriter(new File("data/tipFiltered.json"));
-			FileWriter fwreview = new FileWriter(new File("data/reviewFiltered.json"));
+			FileWriter fwcheckin = new FileWriter(new File(Filepaths.CHECKIN_FILEPATH_FILTERED));
+			FileWriter fwtip = new FileWriter(new File(Filepaths.TIP_FILEPATH_FILTERED));
+			FileWriter fwreview = new FileWriter(new File(Filepaths.REVIEW_FILEPATH_FILTERED));
 			
 			for (Object o : jarrayCheckin) {
 				JSONObject checkin = (JSONObject) o;
