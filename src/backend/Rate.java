@@ -24,6 +24,7 @@ public class Rate {
 		
 		
 		for (Restaurant r: userRestaurants)
+//			System.out.println(GetReviews.from(r));
 			mutualReviews.add(GetReviews.from(r));
 		/**
 		int i = 0;
