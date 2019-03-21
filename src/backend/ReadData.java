@@ -9,46 +9,62 @@ import org.json.JSONObject;
 
 public class ReadData {
 	private static final String BUSINESS_FILEPATH = "data/business.json";
-	private static final String REVIEW_FILEPATH = "data/review_subset.json";
+	private static final String REVIEW_FILEPATH = "data/reviewFiltered.json";
+	private static final String USER_FILEPATH = "data/user.json";
 	
+	static LinearProbingHashST<String, Restaurant> restaurantData;
+	static LinearProbingHashST<String, User> userData;
 	/**
 	 * Read the restaurants from the data into a RedBlackBST of Restaurants
 	 * @return The RedBlackBST of the Restaurants
 	 */
-	public static LinearProbingHashST<String, Restaurant> read(String business_filepath, String review_filepath) {
+	ReadData() {
 		LinearProbingHashST<String, Restaurant> restaurantData = new LinearProbingHashST<String, Restaurant>(400000);
+		LinearProbingHashST<String, User> userData = new LinearProbingHashST<String, User>(400000);
 		BufferedReader businessReader;
 		BufferedReader reviewReader;
+		BufferedReader userReader;
 		String line;
 		
 		try {
 			//Read businesses to hash table
-			businessReader = new BufferedReader(new FileReader(business_filepath));
+			businessReader = new BufferedReader(new FileReader(BUSINESS_FILEPATH));
 			while ((line = businessReader.readLine()) != null) {
 				Restaurant restaurant = RestaurantRead(line);
 				if (restaurant != null)
 					restaurantData.put(restaurant.getID(), restaurant);
 			} businessReader.close();
 			
+			//Read users to hash table
+			userReader = new BufferedReader(new FileReader(USER_FILEPATH));
+			while ((line = userReader.readLine()) != null) {
+				User user = UserRead(line);
+				if (user != null)
+					userData.put(user.getID(), user);
+			} userReader.close();
+			
 			//Read Reviews into linked list for each restaurant
-			reviewReader = new BufferedReader(new FileReader(review_filepath));
+			reviewReader = new BufferedReader(new FileReader(REVIEW_FILEPATH));
 			while ((line = reviewReader.readLine()) != null) {
 				Review review = ReviewRead(line);
 				Restaurant restaurant = restaurantData.get(review.getBusinessID());
-				if (restaurant != null)
+				User user = userData.get(review.getUserID());
+				if (restaurant != null && user!= null) {
 					restaurant.addReview(review);
-					
+					user.addReview(review);
+				}
 			} reviewReader.close();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return restaurantData;
+		ReadData.restaurantData = restaurantData;
+		ReadData.userData = userData;
+	}	
+	private User UserRead(String line) {
+		JSONObject currObj = new JSONObject(line);
+		return new User((String) currObj.get("user_id"));
 	}
-	public static LinearProbingHashST<String, Restaurant> read() {
-		return read(BUSINESS_FILEPATH, REVIEW_FILEPATH);
-	}
-	
 	// Copied from David's restRead.java
 	private static Restaurant RestaurantRead(String line) {
 		// Make a JSON object from the current line
@@ -92,10 +108,9 @@ public class ReadData {
 	}
 	
 	public static void main(String[] args) {
-		LinearProbingHashST<String, Restaurant> restaurantData = read();
-		System.out.println(restaurantData.contains("Gyrez6K8f1AyR7dzW9fvAw")
-				);
-		for (Review r : restaurantData.get("Gyrez6K8f1AyR7dzW9fvAw").getReviews())
-			System.out.println(r);
+		ReadData data = new ReadData();
+		for (Review r : data.restaurantData.get("Gyrez6K8f1AyR7dzW9fvAw").getReviews())
+			for (Review p: data.userData.get(r.getUserID()).getReviews())
+				if (p != r) System.out.println(p);
 	}
 }

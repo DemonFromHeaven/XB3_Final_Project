@@ -6,43 +6,43 @@ import java.util.Scanner;
 
 public class Rate {
 	public static void main(String[] args) {
+		new ReadData();
 		Scanner in = new Scanner(System.in);
-		
-		ArrayList<ArrayList<Review>> mutualReviews = new ArrayList<ArrayList<Review>>();
 		ArrayList<Restaurant> userRestaurants = new ArrayList<Restaurant>();
-		ArrayList<RankPair> potentialRestaurants = new ArrayList<RankPair>();
 		ArrayList<Double> userStars = new ArrayList<Double>();
-		String tempid;
+		ArrayList<RankPair> recommendation = new ArrayList<RankPair>();
 		
 		// cHdJXLlKNWixBXpDwEGb_A is a good test string
 		while(true) {
-			System.out.println("Enter the id of the restaurant you tried - or 1 to exit");
-			tempid = in.nextLine();
-			if (tempid.equals("1")) break;
-			userRestaurants.add(new Restaurant(tempid));
+			System.out.println("Enter the id of the restaurant you tried - or c to continue");
+			String id = in.nextLine();
+			Restaurant restaurant = ReadData.restaurantData.get(id);
+
+			if (restaurant != null) userRestaurants.add(restaurant);
+			else if(id.equals("c")) break; 
+			else {
+				System.out.println("This id doesnt not correspond to a restaurant");
+				continue;
+			}
+			
 			System.out.println("Enter your rating out of 5");
 			userStars.add(Double.parseDouble(in.nextLine()));
+			
 		} in.close();
 		
-		
-		for (Restaurant r: userRestaurants)
-			mutualReviews.add(ReviewGet.from(r));
-		
 		int i = 0;
-		for (ArrayList<Review> reviews: mutualReviews) {
-			for (Review r: reviews) {
-				double weight = userStars.get(i);
-				User u = new User(r.getUserID());
-				ArrayList<Review> extendedReviews = ReviewGet.from(u);
-				
-				for (Review e: extendedReviews)
-					if (e.getBusinessID() != r.getBusinessID())
-						potentialRestaurants.add( new RankPair(e.getStars()*weight,
-												  new Restaurant(e.getBusinessID())));
-			} 
+		for (Restaurant r: userRestaurants) {
+			for (Review review: r.getReviews()) {
+				for (Review extended: ReadData.userData.get(review.getUserID()).getReviews()) {
+					double congruence = 1/Math.abs(review.getStars() - userStars.get(i));
+					double hardToPlease = 1/(review.getStars());
+					Restaurant toTry = ReadData.restaurantData.get(extended.getBusinessID());
+					double rating = congruence * hardToPlease * extended.getStars() * toTry.getStars();
+					recommendation.add(new RankPair(rating, toTry));
+				}
+			}
 			i++;
 		}
-		
 		Comparator<RankPair> byRating = new Comparator<RankPair>() {
 			public int compare(RankPair r1, RankPair r2) {
 				if (r1.rating < r2.rating) return 1;
@@ -51,7 +51,7 @@ public class Rate {
 			}
 		};
 		
-		potentialRestaurants.sort(byRating);
-		System.out.println(potentialRestaurants);
+		recommendation.sort(byRating);
+		System.out.println(recommendation);
 	}
 }
