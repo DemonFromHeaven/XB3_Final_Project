@@ -1,10 +1,13 @@
 package backend;
 
-public class RankPair<X, Y> {
-	public final X x; 
-	public final Y y; 
-	public RankPair(X x, Y y) { 
-	    this.x = x; 
-	    this.y = y; 
-	} 
+public class RankPair {
+	public final double rating; 
+	public final Restaurant restaurant; 
+	public RankPair(double rating, Restaurant restaurant) { 
+	    this.rating = rating; 
+	    this.restaurant = restaurant; 
+	}
+	public String toString() {
+		return "Weighted Rating: " + rating + "Restaurant id: " + restaurant.getID() + "\n";
+	}
 }
