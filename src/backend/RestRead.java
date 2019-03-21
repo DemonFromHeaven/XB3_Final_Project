@@ -7,6 +7,9 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+// TODO: implement restaurant storage as HashMap
+//       store the review in the restaurant objects
+
 public class RestRead {
 	
 	private static final String BUSINESS_FILEPATH = "data/businessFiltered.json";

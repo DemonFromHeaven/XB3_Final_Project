@@ -1,4 +1,4 @@
-package backend.tests;
+package test;
 
 import org.junit.After;
 import org.junit.AfterClass;

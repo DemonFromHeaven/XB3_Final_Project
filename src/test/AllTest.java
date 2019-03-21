@@ -1,4 +1,4 @@
-package backend.tests;
+package test;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
