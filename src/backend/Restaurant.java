@@ -1,5 +1,7 @@
 package backend;
 
+import java.util.ArrayList;
+
 public class Restaurant implements Comparable<Restaurant> {
 
 	private String name;  // The name of the Restaurant
@@ -9,7 +11,7 @@ public class Restaurant implements Comparable<Restaurant> {
 	private double stars;
 	private int price;
 	private int reviewCount;
-	private LinkedList<Review> reviews;
+	private ArrayList<Review> reviews;
 	
 	public Restaurant(String name,
 			String id,
@@ -24,7 +26,7 @@ public class Restaurant implements Comparable<Restaurant> {
 		this.stars = stars;
 		this.price = price;
 		this.reviewCount = reviewCount;
-		this.reviews = new LinkedList<Review>();
+		this.reviews = new ArrayList<Review>();
 		
 	}
 	
@@ -65,10 +67,10 @@ public class Restaurant implements Comparable<Restaurant> {
 	}
 
 	public void addReview(Review review) {
-		reviews.insert(review);
+		reviews.add(review);
 	}
 	
-	public LinkedList<Review> getReviews() {
+	public ArrayList<Review> getReviews() {
 		return reviews;
 	}
 
