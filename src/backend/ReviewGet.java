@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Matthew Williams L03 willim36
  */
 public class ReviewGet {
-	private static ReviewSort r = new ReviewSort();
+	private static ReviewRead r = new ReviewRead();
 	/**
 	 * Retrieve reviews from this user
 	 * @param u The user to get reviews from

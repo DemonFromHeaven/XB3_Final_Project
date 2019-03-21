@@ -3,11 +3,13 @@ package backend;
 public class Restaurant implements Comparable<Restaurant> {
 
 	private String name;  // The name of the Restaurant
+
 	private String id;  // The unique identifier for the Restaurant from the file
 	private Location loc;  // The address of the Restaurant
 	private double stars;
 	private int price;
 	private int reviewCount;
+	private LinkedList<Review> reviews;
 	
 	public Restaurant(String name,
 			String id,
@@ -22,6 +24,7 @@ public class Restaurant implements Comparable<Restaurant> {
 		this.stars = stars;
 		this.price = price;
 		this.reviewCount = reviewCount;
+		this.reviews = new LinkedList<Review>();
 		
 	}
 	
@@ -59,6 +62,14 @@ public class Restaurant implements Comparable<Restaurant> {
 	
 	public String toString() {
 		return name + " at " + loc;
+	}
+
+	public void addReview(Review review) {
+		reviews.insert(review);
+	}
+	
+	public LinkedList<Review> getReviews() {
+		return reviews;
 	}
 
 }

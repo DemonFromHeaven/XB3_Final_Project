@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Load sorted review arrays from json
  * @author Matthew Williams L03 willim36
  */
-public class ReviewSort {
+public class ReviewRead {
 	private static final String REVIEW_FILEPATH = "data/review_subset.json";
 	private static Review[] reviewsByBusiness;
 	private static Review[] reviewsByUser;
@@ -19,7 +19,7 @@ public class ReviewSort {
 	/**
 	 * Constructor loads the arrays from json
 	 */
-	ReviewSort() {
+	ReviewRead() {
 		// Read reviews into arraylist from file
 		BufferedReader br = null;
 		ArrayList<Review> a = new ArrayList<Review>();

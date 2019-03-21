@@ -26,15 +26,14 @@ public class Rate {
 		
 		
 		for (Restaurant r: userRestaurants)
-//			System.out.println(GetReviews.from(r));
-			mutualReviews.add(GetReviews.from(r));
+			mutualReviews.add(ReviewGet.from(r));
 		
 		int i = 0;
 		for (ArrayList<Review> reviews: mutualReviews) {
 			for (Review r: reviews) {
 				double weight = userStars.get(i);
 				User u = new User(r.getUserID());
-				ArrayList<Review> extendedReviews = GetReviews.from(u);
+				ArrayList<Review> extendedReviews = ReviewGet.from(u);
 				
 				for (Review e: extendedReviews)
 					if (e.getBusinessID() != r.getBusinessID())
