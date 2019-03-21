@@ -19,7 +19,7 @@ public class ReviewFiltering {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(REVIEW_FILEPATH));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(REVIEW_FILEPATH_FILTERED));
-		RedBlackBST<String, Restaurant> rb = RestRead.readRestaurants();
+		RedBlackBST<String, Restaurant> rb = RestRead.readRestaurants(Filepaths.BUSINESS_FILEPATH);
 		
 		String line, newLine, restaurantID;
 		
