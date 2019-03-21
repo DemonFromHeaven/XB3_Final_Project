@@ -19,14 +19,17 @@ public class ReviewFiltering {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(REVIEW_FILEPATH));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(REVIEW_FILEPATH_FILTERED));
+		RedBlackBST<String, Restaurant> rb = RestRead.readRestaurants();
 		
-		String line, newLine;
+		String line, newLine, restaurantID;
 		
 		while((line = br.readLine()) != null) {
 			JSONObject currObj = new JSONObject(line);
+			restaurantID = (String)currObj.get("business_id");
+			if (!rb.contains(restaurantID)) continue;
 			newLine = "{";
 			newLine += ("\"user_id\":" + (String)currObj.get("user_id") + ",");
-			newLine += ("\"business_id\":" + (String)currObj.get("business_id") + ",");
+			newLine += ("\"business_id\":" + restaurantID + ",");
 			newLine += ("\"stars\":" + currObj.get("stars"));
 			newLine += ("}\n");
 			bw.write(newLine);
