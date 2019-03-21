@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * @author Matthew Williams L03 willim36
  */
 public class ReviewSort {
-	private static final String REVIEW_FILEPATH = "data/reviewFiltered.json";
+	private static final String REVIEW_FILEPATH = "data/review_subset.json";
 	private static Review[] reviewsByBusiness;
 	private static Review[] reviewsByUser;
 	
@@ -84,7 +84,6 @@ public class ReviewSort {
 	}
 	private static Review[] copyArray(ArrayList<Review> alr) {
 		Review[] reviews = new Review[alr.size()];
-		System.out.println("test");
 		for (int i = 0; i < alr.size(); i++) {
 			reviews[i] = alr.get(i);
 		}

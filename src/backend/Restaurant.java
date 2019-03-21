@@ -25,6 +25,10 @@ public class Restaurant implements Comparable<Restaurant> {
 		
 	}
 	
+	public Restaurant(String id) {
+		this.id = id;
+	}
+
 	public String getID() {
 		return id;
 	}
