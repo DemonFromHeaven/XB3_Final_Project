@@ -13,7 +13,6 @@ import org.json.JSONObject;
  */
 public class ReviewSort {
 	private static final String REVIEW_FILEPATH = "data/reviewFiltered.json";
-	
 	private static Review[] reviewsByBusiness;
 	private static Review[] reviewsByUser;
 	
@@ -50,22 +49,21 @@ public class ReviewSort {
 			}
 		};
 		a.sort(byUser);
-		ReviewSort.reviewsByUser = (Review[]) a.toArray();
-		
+		reviewsByUser = copyArray(a);
 		Comparator<Review> byBusiness = new Comparator<Review>() {
 			public int compare(Review r1, Review r2) {
 				return r1.getBusinessID().compareTo(r2.getBusinessID());
 			}
 		};
 		a.sort(byBusiness);
-		ReviewSort.reviewsByBusiness = (Review[]) a.toArray();
+		reviewsByBusiness = copyArray(a);
 	}
 	/**
 	 * Access the sorted reviews
 	 * @param type Must be user or restaurant
 	 * @return The array of sorted reviews
 	 */
-	public static Review[] getReviews(String type) {
+	public Review[] getReviews(String type) {
 		if (type.equals("user")) return reviewsByUser;
 		if (type.equals("restaurant"))return reviewsByBusiness;
 		return null;
@@ -83,5 +81,13 @@ public class ReviewSort {
 	 */
 	public static Review[] getReviewsByBusiness() {
 		return reviewsByBusiness;
+	}
+	private static Review[] copyArray(ArrayList<Review> alr) {
+		Review[] reviews = new Review[alr.size()];
+		System.out.println("test");
+		for (int i = 0; i < alr.size(); i++) {
+			reviews[i] = alr.get(i);
+		}
+		return reviews;
 	}
 }

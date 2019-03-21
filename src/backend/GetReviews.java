@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * @author Matthew Williams L03 willim36
  */
 public class GetReviews {
+	private static ReviewSort r = new ReviewSort();
 	/**
 	 * Retrieve reviews from this user
 	 * @param u The user to get reviews from
@@ -26,12 +27,14 @@ public class GetReviews {
 	
 	// Returns list of reviews match user/business id
 	private static ArrayList<Review> from(String id, String type) {
-		Review[] reviewArray = ReviewSort.getReviews(type);
+		Review[] reviewArray = r.getReviews(type);
 		ArrayList<Review> reviewList = new ArrayList<Review>();
 		int i = indexOf(reviewArray, id, type);
-		
 		//Find first matching review
-		while(reviewArray[i - 1].getID(type).equals(id)) i--;
+		while(reviewArray[i - 1].getID(type).equals(id)) {
+			if (i != 1) i--;
+			else break;
+		}
 		//Add all matching reviews
 		while(reviewArray[i].getID(type).equals(id))
 			reviewList.add(reviewArray[i++]);
@@ -39,13 +42,13 @@ public class GetReviews {
 		return reviewList;
 	}
 	// binary search for to find review with given user/business id
-	private static int indexOf(Review[] reviews, String id, String type) {
-        int lo = 0, hi = reviews.length - 1, cmp;
+	private static int indexOf(Review[] reviewArray, String id, String type) {
+        int lo = 0, hi = reviewArray.length - 1;
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            cmp = id.compareTo(reviews[mid].getID(type));
-            if (cmp == 0) return mid;
-            hi = mid + cmp;
+            if      (id.compareTo(reviewArray[mid].getID(type)) < 0) hi = mid - 1;
+            else if (id.compareTo(reviewArray[mid].getID(type)) > 0) lo = mid + 1;
+            else 	return mid;
         }
         return -1;
     }

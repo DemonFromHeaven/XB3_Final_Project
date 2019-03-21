@@ -49,4 +49,7 @@ public class Review{
 		if (type.equals("restaurant"))	return getBusinessID();
 		return null;
 	}
+	public String toString() {
+		return getUserID() + " reviewed " + getBusinessID() + " " + getStars() + " stars.\n";
+	}
 }

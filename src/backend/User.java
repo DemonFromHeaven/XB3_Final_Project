@@ -1,22 +1,18 @@
 package backend;
-
 /**
  * Holds User info
  * @author Matthew Williams
  *
  */
 public class User {
-	private final String id;
-	private final int reviewCount;
-	
+	private final String id;	
 	/**
 	 * Constructor
 	 * @param id user id
 	 * @param reviewCount count of users reviews
 	 */
-	public User(String id, int reviewCount) {
+	public User(String id) {
 		this.id = id;
-		this.reviewCount = reviewCount;
 	}
 	/**
 	 * get users id
@@ -25,14 +21,4 @@ public class User {
 	public String getID() {
 		return id;
 	}
-
-	/**
-	 * get users number of reviews
-	 * @return review count
-	 */
-	public int getReviewCount() {
-		return reviewCount;
-	}
-	
-	
 }
