@@ -17,13 +17,14 @@ import backend.Stopwatch;
  */
 public class RestReadTest {
 
-	static RedBlackBST<String, Restaurant> restRBBST;
+	private static final String BUSINESS_FILEPATH_UNFILTERED = "data/business.json";
+	private static RedBlackBST<String, Restaurant> restRBBST;
 	
 	// Arizona Biltmore Golf Club at 2818 E Camino Acequia Drive, Phoenix, AZ
-	static final String ARIZONA_GOLF = "1SWheh84yJXfytovILXOAQ";
+	private static final String ARIZONA_GOLF = "1SWheh84yJXfytovILXOAQ";
 	
 	// Hilton Toronto at 145 Richmond Street W, Toronto, ON
-	static final String HILTON_RICHMOND_TO = "i6hWP3si97eKQl_JyK8L3w";
+	private static final String HILTON_RICHMOND_TO = "i6hWP3si97eKQl_JyK8L3w";
 	
 	/**
 	 * Read the data into the RedBlackBST, and time how long it takes to read
@@ -32,7 +33,7 @@ public class RestReadTest {
 	public static void setUpBeforeClass() {
 		Stopwatch sw = new Stopwatch();
 		sw.tick();
-		restRBBST = RestRead.readRestaurants();
+		restRBBST = RestRead.readRestaurants(BUSINESS_FILEPATH_UNFILTERED);
 		sw.tock();
 		System.out.println("Building the RBBST took "
 				+ sw.elapsedMillis()
