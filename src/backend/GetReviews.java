@@ -31,10 +31,9 @@ public class GetReviews {
 		ArrayList<Review> reviewList = new ArrayList<Review>();
 		int i = indexOf(reviewArray, id, type);
 		//Find first matching review
-		while(reviewArray[i - 1].getID(type).equals(id)) {
-			if (i != 1) i--;
-			else break;
-		}
+		while(reviewArray[i - 1].getID(type).equals(id))
+			if (--i == 0) break;
+
 		//Add all matching reviews
 		while(reviewArray[i].getID(type).equals(id))
 			reviewList.add(reviewArray[i++]);
@@ -52,4 +51,8 @@ public class GetReviews {
         }
         return -1;
     }
+	public static void main(String[] args) {
+		User u = new User("hG7b0MtEbXx5QzbzE6C_VA");
+		System.out.println(from(u));
+	}
 }

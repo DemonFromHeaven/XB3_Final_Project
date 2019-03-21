@@ -5,15 +5,16 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class Rate {
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
+		
 		ArrayList<ArrayList<Review>> mutualReviews = new ArrayList<ArrayList<Review>>();
 		ArrayList<Restaurant> userRestaurants = new ArrayList<Restaurant>();
 		ArrayList<RankPair> potentialRestaurants = new ArrayList<RankPair>();
 		ArrayList<Double> userStars = new ArrayList<Double>();
 		String tempid;
 		
+		// cHdJXLlKNWixBXpDwEGb_A is a good test string
 		while(true) {
 			System.out.println("Enter the id of the restaurant you tried - or 1 to exit");
 			tempid = in.nextLine();
@@ -21,7 +22,7 @@ public class Rate {
 			userRestaurants.add(new Restaurant(tempid));
 			System.out.println("Enter your rating out of 5");
 			userStars.add(Double.parseDouble(in.nextLine()));
-		}
+		} in.close();
 		
 		
 		for (Restaurant r: userRestaurants)
@@ -30,11 +31,16 @@ public class Rate {
 		int i = 0;
 		for (ArrayList<Review> reviews: mutualReviews) {
 			for (Review r: reviews) {
-				double stars = r.getStars();
 				double weight = userStars.get(i);
-				Restaurant rest = new Restaurant(r.getBusinessID());
-				potentialRestaurants.add(new RankPair(stars*weight, rest));
-			}
+				User u = new User(r.getUserID());
+				ArrayList<Review> extendedReviews = GetReviews.from(u);
+				
+				for (Review e: extendedReviews)
+					if (e.getBusinessID() != r.getBusinessID())
+						potentialRestaurants.add( new RankPair(e.getStars()*weight,
+												  new Restaurant(e.getBusinessID())));
+			} 
+			i++;
 		}
 		
 		Comparator<RankPair> byRating = new Comparator<RankPair>() {
@@ -44,7 +50,8 @@ public class Rate {
 				return 0;
 			}
 		};
+		
 		potentialRestaurants.sort(byRating);
-		System.out.print(potentialRestaurants);
+		System.out.println(potentialRestaurants);
 	}
 }

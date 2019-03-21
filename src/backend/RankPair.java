@@ -1,5 +1,4 @@
 package backend;
-
 public class RankPair {
 	public final double rating; 
 	public final Restaurant restaurant; 
