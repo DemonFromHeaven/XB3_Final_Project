@@ -18,4 +18,7 @@ public class Filepaths {
 	public static final String CHECKIN_FILEPATH = "data/checkin.json";
 	public static final String CHECKIN_FILEPATH_FILTERED = "data/checkinFiltered.json";
 	
+	// User data filepath
+	public static final String USER_FILEPATH = "data/user.json";
+	
 }

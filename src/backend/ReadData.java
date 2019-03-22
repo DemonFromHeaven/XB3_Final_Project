@@ -8,17 +8,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ReadData {
-	private static final String BUSINESS_FILEPATH = "data/business.json";
-	private static final String REVIEW_FILEPATH = "data/reviewFiltered.json";
-	private static final String USER_FILEPATH = "data/user.json";
+	
+	// I have these constants in the Filepaths.java file now
+//	private static final String BUSINESS_FILEPATH = "data/business.json";
+//	private static final String REVIEW_FILEPATH = "data/reviewFiltered.json";
+//	private static final String USER_FILEPATH = "data/user.json";
 	
 	static LinearProbingHashST<String, Restaurant> restaurantData;
 	static LinearProbingHashST<String, User> userData;
+	
 	/**
-	 * Read the restaurants from the data into a RedBlackBST of Restaurants
-	 * @return The RedBlackBST of the Restaurants
+	 * Read the restaurants and user data from file into Linear
+	 * Probing Hash Tables
+	 * @return The Linear Probing Hash Table of the Restaurants
 	 */
-	ReadData() {
+	public ReadData() {
 		LinearProbingHashST<String, Restaurant> restaurantData = new LinearProbingHashST<String, Restaurant>(400000);
 		LinearProbingHashST<String, User> userData = new LinearProbingHashST<String, User>(400000);
 		BufferedReader businessReader;
@@ -28,7 +32,7 @@ public class ReadData {
 		
 		try {
 			//Read businesses to hash table
-			businessReader = new BufferedReader(new FileReader(BUSINESS_FILEPATH));
+			businessReader = new BufferedReader(new FileReader(Filepaths.BUSINESS_FILEPATH));
 			while ((line = businessReader.readLine()) != null) {
 				Restaurant restaurant = RestaurantRead(line);
 				if (restaurant != null)
@@ -36,7 +40,7 @@ public class ReadData {
 			} businessReader.close();
 			
 			//Read users to hash table
-			userReader = new BufferedReader(new FileReader(USER_FILEPATH));
+			userReader = new BufferedReader(new FileReader(Filepaths.USER_FILEPATH));
 			while ((line = userReader.readLine()) != null) {
 				User user = UserRead(line);
 				if (user != null)
@@ -44,7 +48,7 @@ public class ReadData {
 			} userReader.close();
 			
 			//Read Reviews into linked list for each restaurant
-			reviewReader = new BufferedReader(new FileReader(REVIEW_FILEPATH));
+			reviewReader = new BufferedReader(new FileReader(Filepaths.REVIEW_FILEPATH));
 			while ((line = reviewReader.readLine()) != null) {
 				Review review = ReviewRead(line);
 				Restaurant restaurant = restaurantData.get(review.getBusinessID());
@@ -60,12 +64,19 @@ public class ReadData {
 		}
 		ReadData.restaurantData = restaurantData;
 		ReadData.userData = userData;
-	}	
+	}
+	
 	private User UserRead(String line) {
 		JSONObject currObj = new JSONObject(line);
 		return new User((String) currObj.get("user_id"));
 	}
+	
 	// Copied from David's restRead.java
+	/**
+	 * Read a String into a Restaurant object
+	 * @param line The input String
+	 * @return The Restaurant object
+	 */
 	private static Restaurant RestaurantRead(String line) {
 		// Make a JSON object from the current line
 		JSONObject currObj = new JSONObject(line);
@@ -98,6 +109,11 @@ public class ReadData {
 		return restaurant;
 	}
 	
+	/**
+	 * Read a review from JSON into a review object.
+	 * @param line The JSON String representing the Review
+	 * @return The Review object
+	 */
 	private static Review ReviewRead(String line) {
 		JSONObject currObj = new JSONObject(line);
 		return new Review(
@@ -113,4 +129,5 @@ public class ReadData {
 			for (Review p: data.userData.get(r.getUserID()).getReviews())
 				if (p != r) System.out.println(p);
 	}
+	
 }

@@ -7,13 +7,14 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// TODO: implement restaurant storage as HashMap
-//       store the review in the restaurant objects
-
+@Deprecated
+/**
+ * This library contains a function to read the business data
+ * into a RedBlackBST, however, we have switch to using
+ * functions in ReadData.java
+ * @author David Thompson
+ */
 public class RestRead {
-	
-	private static final String BUSINESS_FILEPATH = "data/businessFiltered.json";
-	private static final String BUSINESS_FILEPATH_UNFILTERED = "data/business.json";
 	
 	/**
 	 * Read the restaurants from the data into a RedBlackBST of Restaurants

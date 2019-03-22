@@ -11,6 +11,10 @@ import org.json.simple.parser.JSONParser;
 
 public class FileFilter {
 
+	/**
+	 * Generate the filtered restaurant data file
+	 * @return
+	 */
 	public static String filterRest() {
 		String outFile = Filepaths.BUSINESS_FILEPATH_FILTERED;
 		File businessIn = new File(Filepaths.BUSINESS_FILEPATH);
