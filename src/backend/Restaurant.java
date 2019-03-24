@@ -2,6 +2,9 @@ package backend;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Restaurant implements Comparable<Restaurant> {
 
 	private String name;  // The name of the Restaurant
@@ -68,6 +71,43 @@ public class Restaurant implements Comparable<Restaurant> {
 
 	public void addReview(Review review) {
 		reviews.add(review);
+	}
+	
+	/**
+	 * Read a restaurant from a JSON String into a Restaurant object.
+	 * @param jsonString The JSON string to read from
+	 * @return The Restaurant object
+	 */
+	public static Restaurant fromJSON(String jsonString) {
+		// Make a JSON object from the current line
+		JSONObject currObj = new JSONObject(jsonString);
+		Restaurant restaurant;
+		// Extract the desired parameters from the object
+		String id = (String)currObj.get("business_id");
+		String name = (String)currObj.get("name");
+		Location loc = new Location(
+				(String)currObj.get("address"),
+				(String)currObj.get("city"),
+				(String)currObj.get("state"),
+				currObj.getInt("latitude"),
+				currObj.getInt("longitude"));
+		double stars = currObj.getDouble("stars");
+		int reviewCount = currObj.getInt("review_count");
+		
+		// Extract the string data of the attributes parameter
+		String attributesString = currObj.get("attributes").toString();
+		
+		// Try to convert this string data into another JSON object
+		// If this succeeds, get the price field
+		// If it fails, then this isn't a restaurant
+		try {
+			JSONObject attributes = new JSONObject(attributesString);
+			int price = attributes.getInt("RestaurantsPriceRange2");
+			restaurant = new Restaurant(name, id, loc, stars, price, reviewCount);
+		} catch (JSONException jsone) {
+			restaurant = null;
+		}
+		return restaurant;
 	}
 	
 	public ArrayList<Review> getReviews() {

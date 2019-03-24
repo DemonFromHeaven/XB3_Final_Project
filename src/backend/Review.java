@@ -1,12 +1,17 @@
 package backend;
+
+import org.json.JSONObject;
+
 /**
  * Stores review information
  * @author Matthew Williams L03 willim36
  */
-public class Review{
+public class Review {
+	
 	private final String USER_ID;
 	private final String BUSINESS_ID;
-	private final double STARS;	
+	private final double STARS;
+	
 	/**
 	 * Review constructor
 	 * @param userID ID associatied with user
@@ -18,6 +23,7 @@ public class Review{
 		this.BUSINESS_ID = businessID;
 		this.STARS = stars;
 	}
+	
 	/**
 	 * Get the user id
 	 * @return The user id
@@ -32,6 +38,7 @@ public class Review{
 	public String getBusinessID() {
 		return BUSINESS_ID;
 	}
+	
 	/**
 	 * Get the star rating
 	 * @return The star rating
@@ -39,6 +46,7 @@ public class Review{
 	public double getStars() {
 		return STARS;
 	}
+	
 	/**
 	 * Get the id based on entered type
 	 * @param type The type of id to get
@@ -49,7 +57,23 @@ public class Review{
 		if (type.equals("restaurant"))	return getBusinessID();
 		return null;
 	}
+	
 	public String toString() {
 		return getUserID() + " reviewed " + getBusinessID() + " " + getStars() + " stars.\n";
 	}
+	
+	/**
+	 * Read a review from a JSON String into a Review object.
+	 * @param jsonString The JSON string to read from
+	 * @return The Review object
+	 */
+	public static Review fromJSON(String jsonString) {
+		JSONObject currObj = new JSONObject(jsonString);
+		return new Review(
+						(String) currObj.get("user_id"),
+						(String) currObj.get("business_id"),
+						(double) currObj.get("stars")
+		);
+	}
+	
 }

@@ -2,6 +2,8 @@ package backend;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 /**
  * Holds User info
  * @author Matthew Williams
@@ -43,6 +45,16 @@ public class User {
 	 */
 	public ArrayList<Review> getReviews() {
 		return reviews;
+	}
+	
+	/**
+	 * Make a User from a JSON String
+	 * @param jsonString The JSON string to read from
+	 * @return The User object
+	 */
+	public static User fromJSON(String jsonString) {
+		JSONObject currObj = new JSONObject(jsonString);
+		return new User((String) currObj.get("user_id"));
 	}
 	
 }

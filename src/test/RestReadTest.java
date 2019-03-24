@@ -15,6 +15,7 @@ import backend.Stopwatch;
  * Test to make sure that the data from the JSON file is correct
  * @author David Thompson
  */
+@Deprecated
 public class RestReadTest {
 
 	private static final String BUSINESS_FILEPATH_UNFILTERED = "data/business.json";
