@@ -9,6 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * Library of functions for creating versions of the data files without
+ * non-restaurant data.
+ * @author Rohan Thakral
+ */
 public class FileFilter {
 
 	/**
@@ -78,4 +83,5 @@ public class FileFilter {
 			e.printStackTrace();
 		}
 	}
+	
 }
