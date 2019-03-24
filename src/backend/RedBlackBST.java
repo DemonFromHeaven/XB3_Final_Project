@@ -10,11 +10,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     protected static final boolean RED = true;
     protected static final boolean BLACK = false;
-
-    // Watch as I accidentally break everything
-    // I am going to try to make modifications to this file so this will go on a new branch
-    
-    // Okay. I should be on a new branch
     
     protected class Node {
         public Key key;
