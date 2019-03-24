@@ -12,10 +12,10 @@ import org.json.simple.parser.JSONParser;
 public class FileFilter {
 
 	/**
-	 * Generate the filtered restaurant data file
-	 * @return
+	 * Generate the filtered restaurant data file.
+	 * This filters the businesses to just restaurants.
 	 */
-	public static String filterRest() {
+	public static void filterRest() {
 		String outFile = Filepaths.BUSINESS_FILEPATH_FILTERED;
 		File businessIn = new File(Filepaths.BUSINESS_FILEPATH);
 		File businessOut = new File(outFile);
@@ -35,7 +35,6 @@ public class FileFilter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return outFile;
 	}
 	
 	public static void filterData(RedBlackBST <String, Restaurant> rbRest) {
