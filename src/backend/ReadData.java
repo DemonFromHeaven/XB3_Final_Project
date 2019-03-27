@@ -5,19 +5,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class ReadData {
 	
 	// Stores the Restaurants by ID
-	static LinearProbingHashST<String, Restaurant> restaurantData;
+	private LinearProbingHashST<String, Restaurant> restaurantData;
 	
 	// Stores the user's data
-	static LinearProbingHashST<String, User> userData;
+	private LinearProbingHashST<String, User> userData;
 	
 	// Stores the Restaurant IDs by name
-	static RedBlackBST<String, String> restaurantName;
+	private RedBlackBST<String, String> restaurantName;
 	
 	/**
 	 * Read the restaurants and user data from file into Linear
@@ -25,9 +22,9 @@ public class ReadData {
 	 * @return The Linear Probing Hash Table of the Restaurants
 	 */
 	public ReadData() {
-		LinearProbingHashST<String, Restaurant> restaurantData = new LinearProbingHashST<String, Restaurant>(400000);
-		LinearProbingHashST<String, User> userData = new LinearProbingHashST<String, User>(400000);
-		RedBlackBST<String, String> restaurantName = new RedBlackBST<>();
+		restaurantData = new LinearProbingHashST<String, Restaurant>(400000);
+		userData = new LinearProbingHashST<String, User>(400000);
+		restaurantName = new RedBlackBST<>();
 		BufferedReader businessReader;
 		BufferedReader reviewReader;
 		BufferedReader userReader;
@@ -47,9 +44,10 @@ public class ReadData {
 			businessReader = new BufferedReader(new FileReader(Filepaths.BUSINESS_FILEPATH_FILTERED));
 			while ((line = businessReader.readLine()) != null) {
 				Restaurant restaurant = Restaurant.fromJSON(line);
-				if (restaurant != null)
+				if (restaurant != null) {
 					restaurantData.put(restaurant.getID(), restaurant);
 					restaurantName.put(restaurant.getName(), restaurant.getID());
+				}
 			} businessReader.close();
 			
 			// Read users to hash table
@@ -75,15 +73,20 @@ public class ReadData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ReadData.restaurantData = restaurantData;
-		ReadData.userData = userData;
-		ReadData.restaurantName = restaurantName;
+	}
+	
+	public Restaurant getRestaurant(String id) {
+		return restaurantData.get(id);
+	}
+	
+	public User getUser(String id) {
+		return userData.get(id);
 	}
 	
 	public static void main(String[] args) {
 		ReadData data = new ReadData();
 		for (Review r : data.restaurantData.get("Gyrez6K8f1AyR7dzW9fvAw").getReviews())
-			for (Review p: data.userData.get(r.getUserID()).getReviews())
+			for (Review p: data.getUser(r.getUserID()).getReviews())
 				if (p != r) System.out.println(p);
 	}
 	

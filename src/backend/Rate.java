@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Rate {
 	public static void main(String[] args) {
-		new ReadData();
+		ReadData data = new ReadData();
 		Scanner in = new Scanner(System.in);
 		ArrayList<Restaurant> userRestaurants = new ArrayList<Restaurant>();
 		ArrayList<Double> userStars = new ArrayList<Double>();
@@ -14,9 +14,11 @@ public class Rate {
 		
 		// cHdJXLlKNWixBXpDwEGb_A is a good test string
 		while(true) {
+			// TODO: select restaurant by name instead of ID
+			
 			System.out.println("Enter the id of the restaurant you tried - or c to continue");
 			String id = in.nextLine();
-			Restaurant restaurant = ReadData.restaurantData.get(id);
+			Restaurant restaurant = data.getRestaurant(id);
 
 			if (restaurant != null) userRestaurants.add(restaurant);
 			else if(id.equals("c")) break; 
@@ -33,10 +35,10 @@ public class Rate {
 		int i = 0;
 		for (Restaurant r: userRestaurants) {
 			for (Review review: r.getReviews()) {
-				for (Review extended: ReadData.userData.get(review.getUserID()).getReviews()) {
+				for (Review extended: data.getUser(review.getUserID()).getReviews()) {
 					double congruence = 1/Math.abs(review.getStars() - userStars.get(i));
 					double hardToPlease = 1/(review.getStars());
-					Restaurant toTry = ReadData.restaurantData.get(extended.getBusinessID());
+					Restaurant toTry = data.getRestaurant(extended.getBusinessID());
 					double rating = congruence * hardToPlease * extended.getStars() * toTry.getStars();
 					recommendation.add(new RankPair(rating, toTry));
 				}
