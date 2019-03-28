@@ -68,7 +68,7 @@ public class Restaurant implements Comparable<Restaurant> {
 	public String toString() {
 		return name + " at " + loc;
 	}
-
+	
 	public void addReview(Review review) {
 		reviews.add(review);
 	}
