@@ -29,4 +29,8 @@ public class RankPair implements Comparable<RankPair> {
 		return 0;
 	}
 	
+	public boolean equals(RankPair that) {
+		return this.restaurant.equals(that.restaurant);
+	}
+	
 }

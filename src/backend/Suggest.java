@@ -2,6 +2,12 @@ package backend;
 
 import java.util.ArrayList;
 
+/**
+ * I started writing this before I realized everything that I needed was in Rate.java
+ * @author David Thompson
+ *
+ */
+@Deprecated
 public class Suggest {
 	
 	// The radius, in KM, of the restaurants to put in the filter

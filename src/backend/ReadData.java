@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ReadData {
 	
@@ -75,12 +76,48 @@ public class ReadData {
 		}
 	}
 	
+	/**
+	 * Get the Restaurant object using the restaurant ID
+	 * @param id The ID of the restaurant
+	 * @return The Restaurant data associated with the ID
+	 */
 	public Restaurant getRestaurant(String id) {
 		return restaurantData.get(id);
 	}
 	
+	/**
+	 * Get the User object using the user ID
+	 * @param id The ID of the user
+	 * @return The User data associated with the ID
+	 */
 	public User getUser(String id) {
 		return userData.get(id);
+	}
+	
+	/**
+	 * Search for restaurants by name
+	 * @param name The name search query
+	 * @param maxResults The maximum number of results to return. A non-positive value yields all items.
+	 * @return An ArrayList of potential matching Restaurants
+	 */
+	public ArrayList<Restaurant> searchByName(String name, int maxResults) {
+		
+		ArrayList<Restaurant> results = new ArrayList<>();
+		String bottom = restaurantName.floor(name);
+		String top = restaurantName.ceiling(name);
+		int numAdded = 0;
+		
+		// For all the restaurant names, add the corresponding
+		for (String matchingName: restaurantName.keys(bottom, top)) {
+			results.add(restaurantData.get(restaurantName.get(matchingName)));
+			numAdded++;
+			if (numAdded == maxResults) {
+				break;
+			}
+		}
+		
+		return results;
+		
 	}
 	
 	public static void main(String[] args) {
