@@ -19,18 +19,18 @@ public class Location {
 	private String city;
 	private String state;
 	
-	private double lattitude;
+	private double latitude;
 	private double longitude;
 	
 	/**
 	 * Make a new address object
 	 * @param addr
 	 */
-	public Location(String addr, String city, String state, double lattitude, double longitude) {
+	public Location(String addr, String city, String state, double latitude, double longitude) {
 		this.addr = addr;
 		this.city = city;
 		this.state = state;
-		this.lattitude = lattitude;
+		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 	
@@ -45,7 +45,7 @@ public class Location {
 		// If one of the words fields is missing, generate the URL based off
 		// lattitude/longitude
 		if (addr == "" || city == "" || state == "" ) {
-			String dest = lattitude + "%2C" + longitude;
+			String dest = latitude + "%2C" + longitude;
 			return "https://www.google.com/maps/dir/?api=1&destination=" + dest;
 		}
 		
@@ -67,7 +67,7 @@ public class Location {
 	 */
 	public double distanceTo(Location that) {
 		
-		double deltaLatHalf = (Math.toRadians(that.lattitude) - Math.toRadians(this.lattitude))/2;
+		double deltaLatHalf = (Math.toRadians(that.latitude) - Math.toRadians(this.latitude))/2;
 		double deltaLongHalf = (Math.toRadians(that.longitude) - Math.toRadians(this.longitude))/2;
 		
 		double latSinePart = Math.sin(deltaLatHalf);
@@ -77,8 +77,8 @@ public class Location {
 		longSinePart *= longSinePart;
 		
 		double a = latSinePart
-				+ Math.cos(Math.toRadians(this.lattitude))
-				* Math.cos(Math.toRadians(that.lattitude))
+				+ Math.cos(Math.toRadians(this.latitude))
+				* Math.cos(Math.toRadians(that.latitude))
 				* longSinePart;
 		
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -97,7 +97,7 @@ public class Location {
 	public boolean equals(Object that) {
 		try {
 			Location l = (Location)that;
-			boolean latSame = (this.lattitude - l.lattitude) < 0.0001;
+			boolean latSame = (this.latitude - l.latitude) < 0.0001;
 			boolean longSame = (this.longitude - l.longitude) < 0.0001;
 			return latSame && longSame;
 		} catch(ClassCastException cce) {
@@ -139,6 +139,26 @@ public class Location {
 			
 		}
 		return rep;
+	}
+	
+	public String getAddress() { 
+		return addr;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	
+	public String getState() {
+		return state;
+	}
+	
+	public double getLatitude() {
+		return latitude;
+	}
+	
+	public double getLongitude() {
+		return longitude;
 	}
 	
 }

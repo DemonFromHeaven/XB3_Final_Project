@@ -9,20 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import backend.ReadData;
 import backend.Restaurant;
-import data.Data;
 
-public class GetName extends HttpServlet {
+public class GetRestaurant extends HttpServlet {
 
 	ReadData data;
 
 	@Override
-	public void init() {
-		// TODO: run this centrally so that it only runs once and is used by all servlets
-		data = new ReadData();
-	}
-
-	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+		
+		data = (ReadData) getServletContext().getAttribute("data");
 		
 		// Get the passed restaurant ID
 		String id = (String) request.getParameter("id");
@@ -41,7 +36,7 @@ public class GetName extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_OK);
 				try {
 					BufferedWriter bw = new BufferedWriter(response.getWriter());
-					bw.write(r.getName());
+					bw.write(r.toJSON());
 					bw.close();
 				} catch (IOException e) {
 					// Not sure what to do if we can't write to the response
@@ -50,29 +45,11 @@ public class GetName extends HttpServlet {
 			} else {
 				// Give them a 404 to indicate that the restaurant was not found
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				try {
-					BufferedWriter bw = new BufferedWriter(response.getWriter());
-					bw.write(id + " not found");
-					bw.close();
-				} catch (IOException e) {
-					// Not sure what to do if we can't write to the response
-					e.printStackTrace();
-				}
 			}
 		} else {
 			// Tell the requester that their syntax was invalid
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			try {
-				BufferedWriter bw = new BufferedWriter(response.getWriter());
-				bw.write("Bad request");
-				bw.close();
-			} catch (IOException e) {
-				// Not sure what to do if we can't write to the response
-				e.printStackTrace();
-			}
 		}
-		
-		
 		
 	}
 
