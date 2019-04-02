@@ -16,13 +16,15 @@ import org.json.simple.parser.JSONParser;
  */
 public class FileFilter {
 
+	private static ClassLoader cload = ClassLoader.getSystemClassLoader();
+	
 	/**
 	 * Generate the filtered restaurant data file.
 	 * This filters the businesses to just restaurants.
 	 */
 	public static void filterRest() {
-		String outFile = Filepaths.BUSINESS_FILEPATH_FILTERED;
-		File businessIn = new File(Filepaths.BUSINESS_FILEPATH);
+		String outFile = cload.getResource(Filepaths.BUSINESS_FILEPATH_FILTERED).getFile();
+		File businessIn = new File(cload.getResource(Filepaths.BUSINESS_FILEPATH).getFile());
 		File businessOut = new File(outFile);
 		
 		/**
@@ -42,6 +44,7 @@ public class FileFilter {
 		}
 	}
 	
+	// TODO: use cload here
 	public static void filterData(RedBlackBST <String, Restaurant> rbRest) {
 		
 		JSONParser parser = new JSONParser();

@@ -31,10 +31,14 @@ public class ReadData {
 		BufferedReader userReader;
 		String line;
 		
+		// For when its deployed as a server
+		// https://howtodoinjava.com/java/io/read-file-from-resources-folder/
+		ClassLoader cload = ClassLoader.getSystemClassLoader();
+		
 		try {
 			
 			// Check if the filtered restaurant file is created. If not, create it
-			File restaurantsFiltered = new File(Filepaths.BUSINESS_FILEPATH_FILTERED);
+			File restaurantsFiltered = new File(cload.getResource(Filepaths.BUSINESS_FILEPATH_FILTERED).getFile());
 			if (!restaurantsFiltered.exists()) {
 				System.out.println("Creating the filtered business file...");
 				FileFilter.filterRest();
@@ -42,7 +46,7 @@ public class ReadData {
 			}
 			
 			// Read businesses to hash table
-			businessReader = new BufferedReader(new FileReader(Filepaths.BUSINESS_FILEPATH_FILTERED));
+			businessReader = new BufferedReader(new FileReader(cload.getResource(Filepaths.BUSINESS_FILEPATH_FILTERED).getFile()));
 			while ((line = businessReader.readLine()) != null) {
 				Restaurant restaurant = Restaurant.fromJSON(line);
 				if (restaurant != null) {
@@ -52,7 +56,7 @@ public class ReadData {
 			} businessReader.close();
 			
 			// Read users to hash table
-			userReader = new BufferedReader(new FileReader(Filepaths.USER_FILEPATH));
+			userReader = new BufferedReader(new FileReader(cload.getResource(Filepaths.USER_FILEPATH).getFile()));
 			while ((line = userReader.readLine()) != null) {
 				User user = User.fromJSON(line);
 				if (user != null)
@@ -60,7 +64,7 @@ public class ReadData {
 			} userReader.close();
 			
 			//Read Reviews into linked list for each restaurant
-			reviewReader = new BufferedReader(new FileReader(Filepaths.REVIEW_FILEPATH));
+			reviewReader = new BufferedReader(new FileReader(cload.getResource(Filepaths.REVIEW_FILEPATH).getFile()));
 			while ((line = reviewReader.readLine()) != null) {
 				Review review = Review.fromJSON(line);
 				Restaurant restaurant = restaurantData.get(review.getBusinessID());
