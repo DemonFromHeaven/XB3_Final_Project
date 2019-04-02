@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import org.json.JSONObject;
 
+// TODO: merge into or include in RestRead, fix the call to RestRead here
+
 /**
  * Includes only restaurants and removes unneccessary data
  * @author Matthew Williams

@@ -1,5 +1,10 @@
 package backend;
 
+/**
+ * Contains the relative filepaths of the data files used 
+ * @author David Thompson
+ *
+ */
 public class Filepaths {
 
 	// Filepaths for businesses

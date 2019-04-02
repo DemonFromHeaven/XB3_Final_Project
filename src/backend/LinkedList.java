@@ -2,137 +2,143 @@ package backend;
 
 import java.util.Iterator;
 
+@Deprecated
+/**
+ * We aren't using this
+ *
+ * @param <Item>
+ */
 public class LinkedList<Item> implements Iterable<Item> {
 
-    public class Node {
-        public Item item;
-        public Node next;
+	public class Node {
+		public Item item;
+		public Node next;
 
-        public Node(Item item) {
-            this.item = item;
-        }
-    }
+		public Node(Item item) {
+			this.item = item;
+		}
+	}
 
-    private int size;
-    private Node first;
+	private int size;
+	private Node first;
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
+	public boolean isEmpty() {
+		return size == 0;
+	}
 
-    public int size() {
-        return size;
-    }
+	public int size() {
+		return size;
+	}
 
-    public Node getFirstNode() {
-        return first;
-    }
+	public Node getFirstNode() {
+		return first;
+	}
 
-    public Item get(int index) {
-        if (isEmpty()) {
-            return null;
-        }
+	public Item get(int index) {
+		if (isEmpty()) {
+			return null;
+		}
 
-        if (index < 0 || index >= size()) {
-            throw new IllegalArgumentException("Index must be between 0 and " + (size() - 1));
-        }
+		if (index < 0 || index >= size()) {
+			throw new IllegalArgumentException("Index must be between 0 and " + (size() - 1));
+		}
 
-        Node current = first;
-        int currentIndex = 0;
+		Node current = first;
+		int currentIndex = 0;
 
-        while (currentIndex < index) {
-            currentIndex++;
-            current = current.next;
-        }
+		while (currentIndex < index) {
+			currentIndex++;
+			current = current.next;
+		}
 
-        return current.item;
-    }
+		return current.item;
+	}
 
-    public void insert(Item item) {
-        if (first == null) {
-            first = new Node(item);
-        } else {
-            Node current = first;
+	public void insert(Item item) {
+		if (first == null) {
+			first = new Node(item);
+		} else {
+			Node current = first;
 
-            while (current.next != null) {
-                current = current.next;
-            }
+			while (current.next != null) {
+				current = current.next;
+			}
 
-            current.next = new Node(item);
-        }
+			current.next = new Node(item);
+		}
 
-        size++;
-    }
+		size++;
+	}
 
-    public void remove(int index) {
-        if (isEmpty()) {
-            return;
-        }
+	public void remove(int index) {
+		if (isEmpty()) {
+			return;
+		}
 
-        if (index < 0 || index >= size()) {
-            throw new IllegalArgumentException("Index must be between 0 and " + (size() - 1));
-        }
+		if (index < 0 || index >= size()) {
+			throw new IllegalArgumentException("Index must be between 0 and " + (size() - 1));
+		}
 
-        if (index == 0) {
-            first = first.next;
-        } else {
-            Node current = first;
-            int currentIndex = 0;
+		if (index == 0) {
+			first = first.next;
+		} else {
+			Node current = first;
+			int currentIndex = 0;
 
-            while (currentIndex < index - 1) {
-                currentIndex++;
-                current = current.next;
-            }
+			while (currentIndex < index - 1) {
+				currentIndex++;
+				current = current.next;
+			}
 
-            current.next = current.next.next;
-        }
+			current.next = current.next.next;
+		}
 
-        size--;
-    }
+		size--;
+	}
 
-    public void remove(Item item) {
-        if (isEmpty()) {
-            return;
-        }
+	public void remove(Item item) {
+		if (isEmpty()) {
+			return;
+		}
 
-        if (item.equals(first.item)) {
-            first = first.next;
-            size--;
-        } else {
-            Node current = first;
+		if (item.equals(first.item)) {
+			first = first.next;
+			size--;
+		} else {
+			Node current = first;
 
-            while (current.next != null && !current.next.item.equals(item)) {
-                current = current.next;
-            }
+			while (current.next != null && !current.next.item.equals(item)) {
+				current = current.next;
+			}
 
-            if (current.next != null) {
-                current.next = current.next.next;
-                size--;
-            }
-        }
-    }
+			if (current.next != null) {
+				current.next = current.next.next;
+				size--;
+			}
+		}
+	}
 
-    @Override
-    public Iterator<Item> iterator() {
-        return new LinkedListIterator();
-    }
+	@Override
+	public Iterator<Item> iterator() {
+		return new LinkedListIterator();
+	}
 
-    private class LinkedListIterator implements Iterator<Item> {
+	private class LinkedListIterator implements Iterator<Item> {
 
-        Node currentNode = first;
+		Node currentNode = first;
 
-        @Override
-        public boolean hasNext() {
-            return currentNode != null;
-        }
+		@Override
+		public boolean hasNext() {
+			return currentNode != null;
+		}
 
-        @Override
-        public Item next() {
-            Item item = currentNode.item;
-            currentNode = currentNode.next;
+		@Override
+		public Item next() {
+			Item item = currentNode.item;
+			currentNode = currentNode.next;
 
-            return item;
-        }
-    }
+			return item;
+		}
+	}
 
 }
