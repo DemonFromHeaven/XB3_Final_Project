@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import backend.ReadData;
 import backend.Restaurant;
+import data.Data;
 
 public class GetName extends HttpServlet {
 
@@ -22,7 +23,7 @@ public class GetName extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
-
+		
 		// Get the passed restaurant ID
 		String id = (String) request.getParameter("id");
 
