@@ -27,7 +27,7 @@ public class FileFilter {
 		File businessIn = new File(Data.class.getResource(Filepaths.BUSINESS_FILEPATH).getFile());
 
 		String outFile = businessIn.getAbsolutePath()
-			.substring(0, businessIn.getAbsolutePath().lastIndexOf("/"))
+			.substring(0, businessIn.getAbsolutePath().lastIndexOf("/") + 1)
 			+ Filepaths.BUSINESS_FILEPATH_FILTERED;
 		File businessOut = new File(outFile);
 
