@@ -48,7 +48,8 @@ public class SearchRestaurant extends HttpServlet {
 				try {
                     BufferedWriter bw = new BufferedWriter(response.getWriter());
                     for (Restaurant r: results) {
-                        bw.write(r.toJSON());
+						bw.write(r.toJSON());
+						bw.write("\n");
                     }
 					bw.close();
 				} catch (IOException e) {
