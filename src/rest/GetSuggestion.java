@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import backend.Location;
 import backend.RankPair;
 import backend.ReadData;
 import backend.Restaurant;
@@ -52,6 +53,7 @@ public class GetSuggestion extends HttpServlet {
 			double longitude = Double.parseDouble(request.getParameter("long"));
 			String[] visited = request.getParameterValues("visited");
 			String[] stars = request.getParameterValues("stars");
+			Location loc = new Location("", "", "", latitude, longitude);
 
 			// Allocate an ArrayList for holding the suggestions
 			ArrayList<RankPair> recommendation = new ArrayList<>();
