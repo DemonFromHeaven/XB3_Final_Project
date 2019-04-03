@@ -24,8 +24,11 @@ public class FileFilter {
 	 * just restaurants.cload.getResource
 	 */
 	public static void filterRest() {
-		String outFile = Data.class.getResource(Filepaths.BUSINESS_FILEPATH_FILTERED).getFile();
 		File businessIn = new File(Data.class.getResource(Filepaths.BUSINESS_FILEPATH).getFile());
+
+		String outFile = businessIn.getAbsolutePath()
+			.substring(0, businessIn.getAbsolutePath().lastIndexOf("/"))
+			+ Filepaths.BUSINESS_FILEPATH_FILTERED;
 		File businessOut = new File(outFile);
 
 		/**
