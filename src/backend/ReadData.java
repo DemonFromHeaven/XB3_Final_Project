@@ -36,8 +36,9 @@ public class ReadData {
 		try {
 
 			// Check if the filtered restaurant file is created. If not, create it
-			File restaurantsFiltered = new File(Data.class.getResource(Filepaths.BUSINESS_FILEPATH_FILTERED).getFile());
-			if (!restaurantsFiltered.exists()) {
+			try {
+				Data.class.getResource(Filepaths.BUSINESS_FILEPATH_FILTERED).getFile();
+			} catch (NullPointerException e) {
 				System.out.println("Creating the filtered business file...");
 				FileFilter.filterRest();
 				System.out.println("Done!");
