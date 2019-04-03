@@ -38,11 +38,11 @@ public class GetSuggestion extends HttpServlet {
 		// Try to read in their values, update if they can be read
 		try {
 			radius = Double.parseDouble(request.getParameter("rad"));
-		} catch (NumberFormatException e){
+		} catch (Exception e){
 		}
         try {
 			max = Integer.parseInt(request.getParameter("max"));
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
 		}
 		
 		// Everything else is required, so error if we don't get it
