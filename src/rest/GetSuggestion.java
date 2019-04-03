@@ -103,7 +103,7 @@ public class GetSuggestion extends HttpServlet {
 			int i = 0;
 			while (i < recommendation.size()) {
 				// If this restaurant is out of radius, remove it from the list
-				if (recommendation.get(i).restaurant.getLocation().distanceTo(loc) > RADIUS) {
+				if (recommendation.get(i).restaurant.getLocation().distanceTo(loc) > radius) {
 					recommendation.remove(i);
 					// Move on to checking the next value in the list, which
 					// is at the same index as this was
@@ -118,10 +118,14 @@ public class GetSuggestion extends HttpServlet {
 
 
 			// Construct the JSON response
+			i = 0;
 			BufferedWriter bw = new BufferedWriter(response.getWriter());
 			for (RankPair rp: recommendation) {
 				bw.write(rp.restaurant.toString());
 				bw.write("\n");
+				i++;
+				if (i >= max)
+					break;
 			}
 			bw.close();
 
