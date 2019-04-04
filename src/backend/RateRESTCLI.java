@@ -62,6 +62,9 @@ public class RateRESTCLI {
 			if (name.equals(""))
 				continue;
 
+			// A bit of cleaning
+			name = name.replaceAll(" ", "+");
+			
 			// TODO: cleanse input so that extra information isn't accidently added
 			// GET the query results from the REST API
 			URL searchURL = new URL("http", IP, 8080, "/recommend/search?query=" + name);
