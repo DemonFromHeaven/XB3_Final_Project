@@ -61,10 +61,21 @@ public class Restaurant implements Comparable<Restaurant> {
 		return this.loc;
 	}
 	
+	@Override
 	public int compareTo(Restaurant that) {
 		return this.id.compareTo(that.id);
 	}
 	
+	@Override
+	public boolean equals(Object that) {
+		try {
+			Restaurant r = (Restaurant) that;
+			return this.id.equals(r.id);
+		} catch (ClassCastException e) {
+			return false;
+		}
+	}
+
 	public String toString() {
 		return name + " at " + loc;
 	}

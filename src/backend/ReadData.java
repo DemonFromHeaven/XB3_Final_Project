@@ -15,7 +15,7 @@ public class ReadData {
 	private LinearProbingHashST<String, User> userData;
 	
 	// Stores the Restaurant IDs by name
-	private RedBlackBST<String, String> restaurantName;
+	private TST<String> restaurantName;
 	
 	/**
 	 * Read the restaurants and user data from file into Linear
@@ -25,7 +25,7 @@ public class ReadData {
 	public ReadData() {
 		restaurantData = new LinearProbingHashST<String, Restaurant>(400000);
 		userData = new LinearProbingHashST<String, User>(400000);
-		restaurantName = new RedBlackBST<>();
+		restaurantName = new TST<>();
 		BufferedReader businessReader;
 		BufferedReader reviewReader;
 		BufferedReader userReader;
@@ -96,28 +96,28 @@ public class ReadData {
 	
 	/**
 	 * Search for restaurants by name
-	 * @param name The name search query
-	 * @param maxResults The maximum number of results to return. A non-positive value yields all items.
+	 * 
+	 * @param name       The name search query
+	 * @param maxResults The maximum number of results to return. A non-positive
+	 *                   value yields all items.
 	 * @return An ArrayList of potential matching Restaurants
 	 */
 	public ArrayList<Restaurant> searchByName(String name, int maxResults) {
-		
+
 		ArrayList<Restaurant> results = new ArrayList<>();
-		String bottom = restaurantName.floor(name);
-		String top = restaurantName.ceiling(name);
 		int numAdded = 0;
-		
+
 		// For all the restaurant names, add the corresponding
-		for (String matchingName: restaurantName.keys(bottom, top)) {
+		for (String matchingName : restaurantName.keysWithPrefix(name)) {
 			results.add(restaurantData.get(restaurantName.get(matchingName)));
 			numAdded++;
 			if (numAdded == maxResults) {
 				break;
 			}
 		}
-		
+
 		return results;
-		
+
 	}
 	
 	public static void main(String[] args) {
