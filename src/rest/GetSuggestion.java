@@ -121,7 +121,7 @@ public class GetSuggestion extends HttpServlet {
 			i = 0;
 			BufferedWriter bw = new BufferedWriter(response.getWriter());
 			for (RankPair rp: recommendation) {
-				bw.write(rp.restaurant.toString());
+				bw.write(rp.restaurant.toJSON());
 				bw.write("\n");
 				i++;
 				if (i >= max)

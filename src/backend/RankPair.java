@@ -29,8 +29,14 @@ public class RankPair implements Comparable<RankPair> {
 		return 0;
 	}
 	
-	public boolean equals(RankPair that) {
-		return this.restaurant.equals(that.restaurant);
+	@Override
+	public boolean equals(Object that) {
+		try {
+			RankPair other = (RankPair) that;
+			return this.restaurant.equals(other.restaurant);
+		} catch (ClassCastException e) {
+			return false;
+		}
 	}
 	
 }
