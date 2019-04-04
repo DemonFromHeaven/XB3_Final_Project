@@ -48,6 +48,10 @@ public class Rate {
 			// Break if user flags they are done entering
 			if (name.equals("c"))
 				break;
+			
+			// Return to prompt if it is null
+			if (name.equals(""))
+				continue;
 
 			ArrayList<Restaurant> results = data.searchByName(name, 10);
 
@@ -65,7 +69,7 @@ public class Rate {
 			// Get the index of the restaurant they went to
 			int selection = -1;
 			while (selection < 0 || selection > results.size()) {
-				System.out.println("Please enter a number between 1 and" + results.size()
+				System.out.println("Please enter a number between 1 and " + results.size()
 						+ " to indicate which restaurant you visited");
 				System.out.println("Enter 0 if none of these match where you went");
 				try {
@@ -149,8 +153,13 @@ public class Rate {
 
 		// Print out the recommendations
 		System.out.println("Recommendations:");
+		i = 0;
 		for (RankPair rp : recommendation) {
 			System.out.println(rp.restaurant);
+			i++;
+			if (i >= SEARCH_LIMIT) {
+				break;
+			}
 		}
 
 	}

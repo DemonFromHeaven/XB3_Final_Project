@@ -87,6 +87,14 @@ public class Location {
 		
 	}
 	
+	public double getLatitude() {
+		return lattitude;
+	}
+	
+	public double getLongitude() {
+		return longitude;
+	}
+	
 	/**
 	 * Checks if this location is the same as another.
 	 * This value is based solely off lattitude and longitude.

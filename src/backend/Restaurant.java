@@ -100,8 +100,8 @@ public class Restaurant implements Comparable<Restaurant> {
 				(String)currObj.get("address"),
 				(String)currObj.get("city"),
 				(String)currObj.get("state"),
-				currObj.getInt("latitude"),
-				currObj.getInt("longitude"));
+				currObj.getDouble("latitude"),
+				currObj.getDouble("longitude"));
 		double stars = currObj.getDouble("stars");
 		int reviewCount = currObj.getInt("review_count");
 		

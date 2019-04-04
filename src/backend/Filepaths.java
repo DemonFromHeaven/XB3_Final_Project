@@ -26,4 +26,6 @@ public class Filepaths {
 	// User data filepath
 	public static final String USER_FILEPATH = "data/user.json";
 	
+	public static final String IP_FILEPATH = "data/ip.json";
+	
 }
