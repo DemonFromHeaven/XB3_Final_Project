@@ -1,4 +1,4 @@
-package backend;
+package frontend;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import backend.Filepaths;
+import backend.Location;
+import backend.RankPair;
+import backend.Restaurant;
 /**
  * CLI for RateRest
  * @author David Thompson

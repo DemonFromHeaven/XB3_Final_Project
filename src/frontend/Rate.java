@@ -1,9 +1,15 @@
-package backend;
+package frontend;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import backend.Location;
+import backend.RankPair;
+import backend.ReadData;
+import backend.Restaurant;
+import backend.Review;
 
 /**
  * A client for adding restaurants and generating recommendations
