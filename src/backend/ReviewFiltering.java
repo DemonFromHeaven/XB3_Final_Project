@@ -14,6 +14,7 @@ import org.json.JSONObject;
  * Includes only restaurants and removes unneccessary data
  * @author Matthew Williams
  */
+@Deprecated
 public class ReviewFiltering {
 	private static final String REVIEW_FILEPATH_FILTERED = "data/reviewFiltered.json";
 	private static final String REVIEW_FILEPATH = "data/review.json";

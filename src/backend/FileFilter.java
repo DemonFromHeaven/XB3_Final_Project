@@ -42,7 +42,12 @@ public class FileFilter {
 		}
 	}
 	
-	public static void filterData(RedBlackBST <String, Restaurant> rbRest) {
+	/**
+	 * Generate the filtered data files.
+	 * 
+	 * @param rest The hash table of the restaurants
+	 */
+	public static void filterData(LinearProbingHashST <String, Restaurant> rest) {
 		
 		JSONParser parser = new JSONParser();
 		
@@ -59,21 +64,21 @@ public class FileFilter {
 				JSONObject checkin = (JSONObject) o;
 				
 				String id = (String) checkin.get("business_id");
-				if (rbRest.contains(id)) fwcheckin.write(o.toString());
+				if (rest.contains(id)) fwcheckin.write(o.toString());
 			}
 			
 			for (Object o : jarrayTip) {
 				JSONObject tip = (JSONObject) o;
 				
 				String id = (String) tip.get("business_id");
-				if (rbRest.contains(id)) fwtip.write(o.toString());
+				if (rest.contains(id)) fwtip.write(o.toString());
 			}
 			
 			for (Object o : jarrayReview) {
 				JSONObject review = (JSONObject) o;
 				
 				String id = (String) review.get("business_id");
-				if (rbRest.contains(id)) fwreview.write(o.toString());
+				if (rest.contains(id)) fwreview.write(o.toString());
 			}
 			
 			fwcheckin.close();
