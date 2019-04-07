@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import algorithms.LinearProbingHashST;
+import algorithms.TST;
 /**
  * Reads data into the hash tables
  *
@@ -53,7 +56,7 @@ public class ReadData {
 					restaurantName.put(restaurant.getName(), restaurant.getID());
 				}
 			} businessReader.close();
-			
+
 			// Read users to hash table
 			userReader = new BufferedReader(new FileReader(Filepaths.USER_FILEPATH));
 			while ((line = userReader.readLine()) != null) {
