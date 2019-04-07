@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import algorithms.LinearProbingHashST;
+import algorithms.TST;
 /**
  * Reads data into the hash tables
  *

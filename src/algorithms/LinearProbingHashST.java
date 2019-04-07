@@ -1,4 +1,5 @@
-package backend;
+package algorithms;
+
 /**
  * Hash Symbol Table
  * @author Sedgewick
