@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * A client for adding restaurants and generating recommendations
+ * @author Matthew Williams
+ * @author David Thompson
+ *
+ */
 public class Rate {
 
 	// The radius in which to recommend restaurants in KM
