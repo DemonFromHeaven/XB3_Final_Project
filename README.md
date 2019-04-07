@@ -8,5 +8,8 @@ class.
 ### Maven
 This project uses Maven to build and handle dependencies.
 
+To compile class files:
+`mvn compile`
+
 To run tests:
 `mvn test`
