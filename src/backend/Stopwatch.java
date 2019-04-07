@@ -1,5 +1,8 @@
 package backend;
-
+/**
+ * For timing
+ *
+ */
 public class Stopwatch {
 
 	private long begin, end;

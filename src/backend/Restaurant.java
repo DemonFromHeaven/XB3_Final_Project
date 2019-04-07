@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 
+ * Restaurant ADT
  * @author David Thompson
  * @author Matthew Williams
  *
