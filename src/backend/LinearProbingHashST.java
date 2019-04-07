@@ -1,5 +1,11 @@
 package backend;
-
+/**
+ * Hash Symbol Table
+ * @author Sedgewick
+ *
+ * @param <Key>
+ * @param <Value>
+ */
 public class LinearProbingHashST<Key, Value> {
     private static final int INIT_CAPACITY = 4;
 

@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Restaurant ADT
+ * @author David Thompson
+ * @author Matthew Williams
+ *
+ */
 public class Restaurant implements Comparable<Restaurant> {
 
 	private String name;  // The name of the Restaurant
@@ -16,6 +22,15 @@ public class Restaurant implements Comparable<Restaurant> {
 	private int reviewCount;
 	private ArrayList<Review> reviews;
 	
+	/**
+	 * Review Constructor
+	 * @param name The restaurant name
+	 * @param id The restaurant id
+	 * @param loc The coordinates
+	 * @param stars The star rating
+	 * @param price The p
+	 * @param reviewCount
+	 */
 	public Restaurant(String name,
 			String id,
 			Location loc,
@@ -37,26 +52,50 @@ public class Restaurant implements Comparable<Restaurant> {
 		this.id = id;
 	}
 
+	/**
+	 * ID getter
+	 * @return The restaurant ID
+	 */
 	public String getID() {
 		return id;
 	}
 	
+	/**
+	 * Name getter
+	 * @return The restuarant name
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Stars getter
+	 * @return The star rating
+	 */
 	public double getStars() {
 		return stars;
 	}
 	
+	/**
+	 * Price getter
+	 * @return The restaurant price
+	 */
 	public double getPrice() {
 		return price;
 	}
 	
+	/**
+	 * Review count getter
+	 * @return The number of reviews
+	 */
 	public int getReviewCount() {
 		return this.reviewCount;
 	}
 	
+	/**
+	 * Location getter
+	 * @return The coordinates of the restaurant
+	 */
 	public Location getLocation() {
 		return this.loc;
 	}
@@ -75,11 +114,19 @@ public class Restaurant implements Comparable<Restaurant> {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * String with name and location
+	 * @return The string representation
+	 */
 	public String toString() {
 		return name + " at " + loc;
 	}
 	
+	/**
+	 * Add a review to the review list
+	 * @param review The review to add
+	 */
 	public void addReview(Review review) {
 		reviews.add(review);
 	}
@@ -121,6 +168,10 @@ public class Restaurant implements Comparable<Restaurant> {
 		return restaurant;
 	}
 	
+	/**
+	 * Getter for review list
+	 * @return The list of reviews
+	 */
 	public ArrayList<Review> getReviews() {
 		return reviews;
 	}

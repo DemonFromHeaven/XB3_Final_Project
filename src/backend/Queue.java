@@ -1,11 +1,11 @@
 package backend;
 
+
+
+import java.util.Iterator;
 /**
  * In reference with Algorithms 4th Edition by Robert Sedgewick and Kevin Wayne
  */
-
-import java.util.Iterator;
-
 public class Queue<Item> implements Iterable<Item> {
 
     private class Node {

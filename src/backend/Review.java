@@ -57,7 +57,10 @@ public class Review {
 		if (type.equals("restaurant"))	return getBusinessID();
 		return null;
 	}
-	
+	/**
+	 * A string representation of review with userid business and stars
+	 * @return The string representation
+	 */
 	public String toString() {
 		return getUserID() + " reviewed " + getBusinessID() + " " + getStars() + " stars.\n";
 	}

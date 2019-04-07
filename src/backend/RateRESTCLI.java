@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ * CLI for RateRest
+ * @author David Thompson
+ *
+ */
 public class RateRESTCLI {
 
 	public static String IP;

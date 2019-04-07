@@ -87,10 +87,18 @@ public class Location {
 		
 	}
 	
+	/**
+	 * Latitude getter
+	 * @return The latitude
+	 */
 	public double getLatitude() {
 		return lattitude;
 	}
 	
+	/**
+	 * Longitude getter
+	 * @return The latitude
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
