@@ -53,13 +53,6 @@ public class ReadData {
 					restaurantName.put(restaurant.getName(), restaurant.getID());
 				}
 			} businessReader.close();
-			
-			File reviewsFiltered = new File(Filepaths.BUSINESS_FILEPATH_FILTERED);
-			if (!reviewsFiltered.exists()) {
-				System.out.println("Created the filtered review file...");
-				FileFilter.filterData(restaurantData);
-				System.out.println("Done!");
-			}
 
 			// Read users to hash table
 			userReader = new BufferedReader(new FileReader(Filepaths.USER_FILEPATH));
