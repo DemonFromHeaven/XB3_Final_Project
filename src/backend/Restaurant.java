@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 /**
  * Restaurant ADT
@@ -166,6 +167,34 @@ public class Restaurant implements Comparable<Restaurant> {
 			restaurant = null;
 		}
 		return restaurant;
+	}
+	
+	/**
+	 * Get a JSON String representation of this Restaurant
+	 * 
+	 * @return A JSON String representation of this Restaurant
+	 */
+	public String toJSON() {
+
+		JSONObject attr = new JSONObject().put("RestaurantsPriceRange2", this.price);
+
+		String rep = new JSONStringer()
+			.object()
+				.key("business_id").value(this.id)
+				.key("name").value(this.name)
+				.key("stars").value(this.stars)
+				.key("review_count").value(this.reviewCount)
+				.key("address").value(this.getLocation().getAddress())
+				.key("city").value(this.getLocation().getCity())
+				.key("state").value(this.getLocation().getState())
+				.key("latitude").value(this.getLocation().getLatitude())
+				.key("longitude").value(this.getLocation().getLongitude())
+				.key("attributes").value(attr)
+			.endObject()
+			.toString();
+
+		return rep;
+
 	}
 	
 	/**

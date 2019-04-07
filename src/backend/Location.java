@@ -104,6 +104,30 @@ public class Location {
 	}
 	
 	/**
+	 * Address getter
+	 * @return The address
+	 */
+	public String getAddress() {
+		return addr;
+	}
+	
+	/**
+	 * City getter
+	 * @return The city name, as a String
+	 */
+	public String getCity() {
+		return city;
+	}
+	
+	/**
+	 * Getter for State
+	 * @return The name of the Location's state
+	 */
+	public String getState() {
+		return state;
+	}
+	
+	/**
 	 * Checks if this location is the same as another.
 	 * This value is based solely off lattitude and longitude.
 	 * @param l The other location
