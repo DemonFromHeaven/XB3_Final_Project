@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+
+\title{Recommend Web API Documentation}
+\author{David Thompson, thompd10, 400117555}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Overview}
+
+\begin{tabular}{| l | l | l | l |}
+  \hline
+  \textbf{Routine name} & \textbf{Input} & \textbf{Output} & \textbf{Exceptions} \\
+  \hline
+  /recommend/restaurant & String & Restaurant & 400, 404 \\
+  \hline
+  /recommend/search & String, (int) & seq of Restaurant & 400, 404  \\
+  \hline
+  /recommend/suggest & double, double, seq of String, seq of int, & seq of Restaurant&  400, 404 \\ 
+  & (double, int) & & \\
+  \hline
+\end{tabular}
+
+\newpage
+
+\section*{/recommend/restaurant}
+Get the Restaurant with the given ID. The returned restaurant is represented
+using JSON.
+\subsection*{Example Usage:}
+\begin{verbatim}
+/recommend/restaurant?id=mlHC2XcU9Bows6cnYEmRgg
+\end{verbatim}
+\subsection*{Parameters:}
+\begin{itemize}
+  \item id: The String id of the Restaurant
+\end{itemize}
+\subsection*{Returns:}
+The Restaurant object, represented using JSON.
+\subsection*{Exceptions:}
+\begin{itemize}
+  \item 400: The URL used to call the rountine was malformed
+  \item 404: No restaurant with the given ID was found
+\end{itemize}
+
+\newpage
+
+\section*{/recommend/search}
+Search the database of restaurants with a restaurant whose name begins with
+the search query.
+\subsection*{Example Usage:}
+\begin{verbatim}
+/recommend/restaurant?query=Salad+Da&max=3
+\end{verbatim}
+\subsection*{Parameters:}
+\begin{itemize}
+  \item query: The start of the name of the restaurant to search for
+  \item max: (optional) The maximum number of results to return. The default is 10
+\end{itemize}
+\subsection*{Returns:}
+A newline seperated list of JSON strings, which represent the Restaurant objects
+that match the search query.
+\subsection*{Exceptions:}
+\begin{itemize}
+  \item 400: The URL used to call the rountine was malformed
+  \item 404: No restaurants whose names begin with the wquery String were found
+\end{itemize}
+
+\newpage
+
+\section*{/recommend/suggest}
+Recommend restaurants given a list of previous restaurants and ratings, as well
+as a few other parameters. Please note the sample syntax for building the lists
+in the URL in order to build the lists correctly.
+\subsection*{Example Usage:}
+Split across multiple lines for readability and in order to fit on the page.
+The actual 
+\begin{verbatim}
+/recommend/suggest?
+lat=43.5&long=-79.3
+&visited=mlHC2XcU9Bows6cnYEmRgg&stars=4
+&visited=LmIGu7WPby4lm8MpELlOMw&stars=2
+\end{verbatim}
+\subsection*{Parameters:}
+\begin{itemize}
+  \item lat: The user's latitude in degrees, expressed as a decimal number
+  \item long: The user's longitude in degrees, expressed as a decimal number
+  \item visited: A list of the Restaurant IDs of where the user has been
+  \item stars: A list of the user's ratings of the restaurants they've been to.
+  The ratings must be expressed as an integer between 1 and 5 inclusive at both
+  endpoints. This integer corresponds to the star rating. The list must be the
+  same length as the visited list 
+  \item max: (optional) The maximum number of recommendations to return. If no
+  value is supplied, the default is 10.
+  \item rad: (optional) The cutoff radius for recommendations, as a
+  decimal number, in kilometers. Restaurants outside this range will not be
+  considered. If no value is supplied, the default value of 100 km is used.
+\end{itemize}
+\subsection*{Returns:}
+A newline seperated list of JSON strings, which represent the Restaurant
+objects of the restaurants that are being recommended.
+\subsection*{Exceptions:}
+\begin{itemize}
+  \item 400: The URL used to call the rountine was malformed
+  \item 404: No restaurants where found that could be recommended
+\end{itemize}
+
+\end{document}

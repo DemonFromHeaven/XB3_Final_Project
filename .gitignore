@@ -3,3 +3,8 @@
 .swp
 /target/
 .vscode
+*.log
+*.aux
+*.fls
+*.fdb_latexmk
+*.gz
