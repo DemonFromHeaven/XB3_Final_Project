@@ -5,6 +5,10 @@ This repository contains the Eclipse project for our group's
 final project for McMaster's Software 2XB3 Experiential
 class. The Eclipse project contains both the client and the server programs.
 
+## Technical Details
+This project uses Maven to handle dependencies.
+The server portion of the application was written for a Tomcat server.
+
 ### Server Setup
 1. Ensure that you are running a Unix-based operating system (Linux/macOS), that you have [maven](https://maven.apache.org/) installed and that you are able to execute makefiles
 2. Create a new user to run the server with so that your personal files are moderately more secure
@@ -16,11 +20,7 @@ class. The Eclipse project contains both the client and the server programs.
 8. Copy the yelp dataset files into `~/Desktop/tomcat/webapps/recommend/META-INF/classes/data`
 9. Run `make start`. The server should take 3 minutes to start.
 
-### Maven
-This project uses Maven to build and handle dependencies.
+### Tests
 
-To compile class files:
-`mvn compile`
-
-To run tests:
+To run the test suite, install maven and run the following command in the root directory of the project:
 `mvn test`
