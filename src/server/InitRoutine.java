@@ -4,7 +4,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import backend.ReadData;
 import backend.ReadDataServer;
 
 public class InitRoutine implements ServletContextListener {

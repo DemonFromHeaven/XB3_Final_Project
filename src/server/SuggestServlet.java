@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import backend.Location;
 import backend.RankPair;
-import backend.ReadData;
 import backend.ReadDataServer;
 import backend.Restaurant;
 import backend.Review;
