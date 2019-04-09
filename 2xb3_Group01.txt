@@ -1,1 +1,10 @@
 SFWR ENG 2XB3
+Matthew Williams, 400141675, Designer
+David Thompson, 400117555, Tester
+Rohan Thakral, 400066207, Project Leader
+Othman Mullick, 1303421, Log Admin
+Tishko Araz, 400136305, Client
+The work being submitted, except for the java files in the algorithms package,
+is the work of the group members. (TODO: DATE)
+The java classes in the algorithms package were obtained from the Algorithms 4 website:
+https://algs4.cs.princeton.edu/code/
