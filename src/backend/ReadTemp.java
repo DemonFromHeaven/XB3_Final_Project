@@ -7,6 +7,11 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Only used for sampling dataset for submission
+ * @author Rohan Thakral
+ *
+ */
 public class ReadTemp {
 	
 	public static void main(String[] args) {
