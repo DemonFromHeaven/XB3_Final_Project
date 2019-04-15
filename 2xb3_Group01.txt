@@ -4,6 +4,8 @@ David Thompson, 400117555, Tester
 Rohan Thakral, 400066207, Project Leader
 Othman Mullick, 1303421, Log Admin
 Tishko Araz, 400136305, Client
+Please refer to README.md in order to set up and run the server, and please run
+frontend.RateRESTCLI.java in order to run the client program.
 The work being submitted, except for the java files in the algorithms package,
 is the work of the group members. 14 April, 2019
 The java classes in the algorithms package were obtained from the Algorithms 4 website:
