@@ -40,7 +40,8 @@ public class ReadTemp {
 			while ((line = userReader.readLine()) != null) {
 				User user = User.fromJSON(line);
 				if (user != null) {
-					if (Collections.binarySearch(reviewSet, user.getID()) != -1) {
+					if (Collections.binarySearch(reviewSet, user.getID()) >= 0) {
+						System.out.println(Collections.binarySearch(reviewSet, user.getID()));
 						userWriter.write(line + "\n");
 					}
 				}
